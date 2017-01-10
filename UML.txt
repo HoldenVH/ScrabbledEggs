@@ -1,0 +1,27 @@
+Class:Player(ABSTRACT)
+Description: encompases player and ai
+Vars:ArrayList<Character> rack int score
+Functs: 
+
+Class:AI(implementation of player)
+Description:
+Vars:
+Functs:
+
+Class:User(implementation of player)
+Descrip: player for real person
+Vars:
+Functs: addScore(int i)
+
+Class:Board
+Description:main class of the game, everything runs through here
+Vars:
+Functs: boolean isWord(String w), boolean hasLetters(int x,int y, String w), int checkSides(int x int y, String w)
+
+Class:Woo
+Description: Driver
+Vars:
+Functs:
+
+
+Packages needed: CS1(Keyboard.java)
