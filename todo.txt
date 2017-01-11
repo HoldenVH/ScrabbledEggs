@@ -1,0 +1,18 @@
+David Apterman, Holden Higgins, Henry Zheng
+ScrabbledEggs
+pd3
+
+[ ]Print flowchart
+[ ]Create classes
+[ ]create function to accept input of word &test
+[ ]make board
+[ ]test board
+[ ]find/import the scrabble dictionary
+[ ]Make legality checker
+[ ]test the checker
+[ ]import cs1
+[ ]one person can input words onto the board and have them approved if they are legal
+[ ]make AI to place random words
+[ ]polishing game/menu
+[ ]Improve AI
+[ ]Improve board formatting
