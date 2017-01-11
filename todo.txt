@@ -2,7 +2,7 @@ David Apterman, Holden Higgins, Henry Zheng
 ScrabbledEggs
 pd3
 
-[ ]Print flowchart
+[X]Print flowchart
 [ ]Create classes
 [ ]create function to accept input of word &test
 [ ]make board
