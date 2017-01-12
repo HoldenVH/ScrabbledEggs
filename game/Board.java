@@ -1,5 +1,5 @@
 public class Board{
-    public static String[][] board = new String[30][30];
+    public static String[][] board = new String[31][31];
     public String toString(){
 	String retStr = "";
 	for( int i = 0; i < board.length; i++ ) {
@@ -18,14 +18,24 @@ public class Board{
 	}
     }
     public static void populate(String args[][]){
-	for (int x = 0; x < args.length; x+=2){
+	for (int x = 1; x < args.length; x+=2){
 	    for (int y = 1; y < args[x].length; y+=2){
 		args[x][y] = "a";
 	    }
 	}
-	for (int x = 0; x < args.length; x+=2){
+	for (int x = 1; x < args.length; x+=2){
 	    for (int y = 0; y < args[x].length; y+=2){
 		args[x][y] = "|";
+	    }
+	}
+	for (int x = 0; x < args.length; x+=2){
+	    for (int y = 1; y < args[x].length; y+=2){
+		args[x][y] = "-";
+	    }
+	}
+	for (int x = 0; x < args.length; x+=2){
+	    for (int y = 0; y < args[x].length; y+=2){
+		args[x][y] = " ";
 	    }
 	}
     }
