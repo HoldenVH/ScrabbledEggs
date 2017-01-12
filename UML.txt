@@ -1,7 +1,7 @@
 Class:Player(ABSTRACT)
 Description: encompases player and ai
-Vars:ArrayList<Character> rack int score
-Functs: 
+Vars:ArrayList<char> rack int score
+Functs: int wordScore(int s), ArrayList palceWord(char[][] board);
 
 Class:AI(implementation of player)
 Description:
