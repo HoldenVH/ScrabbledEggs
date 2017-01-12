@@ -18,6 +18,8 @@ public class Board{
 	}
     }
     public static void populate(String args[][]){
+	args[0][0] = "  ";
+	
 	//==============================
 	//creates top row column numbers
 	//==============================
@@ -39,12 +41,28 @@ public class Board{
 	//creates side row numbers
 	//==============================
 
-	//sets row numbers at left
-       	for (int x = 2; x < args[0].length; x+=2){
-	    args[x][0] = (x/2)-1 + "";
+	//*
+	//sets row numbers at left for single digit row numbers
+       	for (int x = 2; x < 22; x+=2){
+	    args[x][0] = " " + ((x/2)-1);
 	}
 
-	//for (
+	//*
+	//sets row numbers at left for double digit row numbers
+	for (int x = 22; x < args[0].length; x+=2){
+	    args[x][0] = x/2-1 + "";
+	}
+	//*/
+
+	//sets spaces between horizontal bars for double digit row numbers
+	for (int x = 21; x < args[0].length; x+=2){
+	    args[x][0] = "  ";
+	}
+
+	//sets spaces between horizontal bars for single digit row numbers
+	for (int x = 1; x < 20; x+=2){
+	    args[x][0] = "  ";
+	}
 
 	//==============================
        	//creates board

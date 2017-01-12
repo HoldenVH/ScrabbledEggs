@@ -13,13 +13,13 @@ OBSTACLES OVERCOME
 wow we so BOSS bc...
 -WE GOT GREEN 
 -board formatting (putting dividing lines between the letters)
+-board numbering
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 blah blah pesky bug...
 maybe some of these will move into the Obs.Ovrcm section...
 
--board numbering
 -checking word/move legality
 -setting up score values
 -setting up AI
@@ -60,7 +60,7 @@ David, Henry   :: worked on Board class
 
 @2017-01-12
 --------------------------------------------------------------
-David   :: added comments to Board, updated flowchart
+David   :: updated flowchart
 Holden  :: updated UML, worked on Player class
-David, Henry   :: added numbering to Board
+David, Henry   :: added numbering to Board, added comments to Board class
 ==============================================================
