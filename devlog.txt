@@ -29,13 +29,14 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
 -WE GOT GREEN 
+-board formatting (putting dividing lines between the letters)
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 blah blah pesky bug...
 maybe some of these will move into the Obs.Ovrcm section...
 
--board formatting (putting dividing lines between the letters)
+-board numbering
 -checking word/move legality
 -setting up score values
 -setting up AI
