@@ -17,7 +17,7 @@ public class Board{
 	    System.out.println();
 	}
     }
-    public static void populate(String args[][]){
+    public static void populate(String args[][], char[][] base){
 	args[0][0] = "  ";
 	
 	//==============================
@@ -26,7 +26,7 @@ public class Board{
 	
 	//sets column numbers at top
 	for (int y = 2; y < args[0].length; y+=2){
-	    args[0][y] = (y/2)-1 + "";
+	    args[0][y] = (y/2) + "";
 	}
 	//sets spaces between single digit column numbers
 	for (int y = 1; y < 20; y+=2){
@@ -43,14 +43,14 @@ public class Board{
 
 	//*
 	//sets row numbers at left for single digit row numbers
-       	for (int x = 2; x < 22; x+=2){
-	    args[x][0] = " " + ((x/2)-1);
+       	for (int x = 2; x < 20; x+=2){
+	    args[x][0] = " " + (x/2);
 	}
 
 	//*
 	//sets row numbers at left for double digit row numbers
-	for (int x = 22; x < args[0].length; x+=2){
-	    args[x][0] = x/2-1 + "";
+	for (int x = 20; x < args[0].length; x+=2){
+	    args[x][0] = x/2 + "";
 	}
 	//*/
 
@@ -71,7 +71,7 @@ public class Board{
 	//sets letter values
 	for (int x = 2; x < args.length; x+=2){
 	    for (int y = 2; y < args[x].length; y+=2){
-		args[x][y] = "a";
+		args[x][y] = Character.toString(base[x/2-1][y/2-1]);
 	    }
 	}
 	//creates vertical column borders
@@ -94,7 +94,13 @@ public class Board{
 	}
     }
     public static void main(String args[]){
-	populate(board);
+	char[][] base=new char[15][15];
+	for(int i=0;i<base.length;i++){
+	    for(int n=0;n< base.length;n++){
+		base[i][n]=(char)('a'+n);
+	    }
+	}
+	populate(board,base);
 	print1(board);
     }
 }
