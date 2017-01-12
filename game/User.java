@@ -1,10 +1,11 @@
 import cs1.Keyboard;
+import java.util.ArrayList;
 
 public class User extends Player{
     //INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>
     public User(){
 	score=0;
-	rack=new ArrayList<char>;
+	rack=new ArrayList<Character>();
     }
     public User(String n){
 	this();
@@ -19,14 +20,17 @@ public class User extends Player{
 	input.add(Keyboard.readWord());
 	return input;
     }
-    public int wordScore(int s){
-	score+=s;
-    }
     public void addLetters(char[] letters){
-	for(letter:letters){
+	for(char letter:letters){
 	    rack.add(letter);
 	}
     }
     public void useLetters(char[] letters){
+	for(int i=0;i<rack.size();i++)
+	    for(char letter:letters)
+		if(rack.get(i)==letter){
+		    rack.remove(i);
+		    i--;
+		}
     }
 }
