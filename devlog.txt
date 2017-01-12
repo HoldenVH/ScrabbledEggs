@@ -53,7 +53,14 @@ tales of wisdom gained...
 yyyy-mm-dd
 @2017-01-11
 --------------------------------------------------------------
-DavidA   :: created flowchart, worked on Board class
-HoldenH  :: created repo, UML, to-do list, worked on Player class
-HenryH   :: worked on Board class
+David   :: created flowchart
+Holden  :: created repo, UML, to-do list, worked on Player class
+David, Henry   :: worked on Board class
+==============================================================
+
+@2017-01-12
+--------------------------------------------------------------
+David   :: added comments to Board, updated flowchart
+Holden  :: updated UML, worked on Player class
+David, Henry   :: added numbering to Board
 ==============================================================
