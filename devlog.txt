@@ -67,7 +67,7 @@ Holden  :: updated UML, worked on implementation of words
 David, Henry   :: added numbering to Board, added comments to Board class, worked on checking perpendicular words algo, fixed useLetters algo
 ==============================================================
 
-@2017-1-13
+@2017-01-13
 --------------------------------------------------------------
 Holden  :: updated UML, created function to place user-inputted words on to the board where the user specified, imported the scrabble dictionary, horifically failed at checking against the dictionary for reasons unknown.
 David, Henry :: worked on feedWord and scoreWord to implement into isWord that Holden failed at implementing. tried to help Holden with isWord
