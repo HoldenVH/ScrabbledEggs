@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+
 public class Board{
-    public static String[][] board = new String[32][32];
+    public static String[][] displayBoard = new String[32][32];
+    private final String[] dictionary =DictReader.OpenFile();
+    private static char[][] board=new char[15][15];
+
+    
     public String toString(){
 	String retStr = "";
 	for( int i = 0; i < board.length; i++ ) {
@@ -10,7 +16,7 @@ public class Board{
 	}
 	return retStr;
     }
-    public static void print1( String[][] a ) { 
+    public static void print2d( String[][] a ) { 
 	for( int i = 0; i < a.length; i++ ) {
 	    for( int j = 0; j < a[i].length; j++ ) 
 		System.out.print( a[i][j] + " " );
@@ -93,14 +99,45 @@ public class Board{
 	    }
 	}
     }
-    public static void main(String args[]){
-	char[][] base=new char[15][15];
-	for(int i=0;i<base.length;i++){
-	    for(int n=0;n< base.length;n++){
-		base[i][n]=(char)('a'+n);
+
+    public static boolean place(ArrayList input){
+	//gets start pos, adjusts for use with board
+   	int x=(int)input.get(0)-1;
+	int y=(int)input.get(1)-1;
+	if(x>14||y>14){
+	    return false;
+	}
+	//right is true down is false
+	boolean dir=(char)input.get(2)=='r';
+	if(!dir && (char)input.get(2)!='d'){
+	    System.out.println("please input valid directions next time");
+	    return false;
+	}
+	char[] word=((String)input.get(3)).toCharArray();
+	if(dir){
+	    for(int i=0;i<word.length;i++){
+		board[x+i][y]=word[i];
 	    }
 	}
-	populate(board,base);
-	print1(board);
+	else{
+	    for(int i=0;i<word.length;i++){
+		board[x][y+i]=word[i];
+	    }
+	}
+	return true;
+    }
+	
+    public static void main(String args[]){
+	for(int i=0;i<board.length;i++){
+	    for(int n=0;n< board.length;n++){
+		board[i][n]=(char)' ' ;
+	    }
+	}
+	
+	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
+	place(User.placeWord());
+
+	populate(displayBoard,board);
+	print2d(displayBoard);
     }
 }
