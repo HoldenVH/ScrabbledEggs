@@ -100,6 +100,42 @@ public class Board{
 	}
     }
 
+    public static boolean isWord(char[] word){
+	int min=0;
+	int max=535501;
+	while(min<max){
+	    int i=0;
+	    boolean same=true;
+	    while(same&& i<word.length && i<dictionary[(min+max)/2].length()){
+		//System.out.println(dictionary[(min+max)/2]);
+		if(word[i]<dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
+		    max=(min+max)/2;
+		    same=false;
+		    System.out.println("low");
+		}
+		else{
+		    if(word[i]>dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
+			min=(min+max)/2;
+			same=false;
+			for(int n=0;n<1000000;n+=2){
+			    n--;
+			}
+			
+			System.out.println((dictionary[(min+max)/2].toLowerCase().toCharArray())[0]);
+		    }
+		    else{
+			if(i==word.length-1 && i==dictionary[(min+max)/2].length()){
+			    return true;
+				}
+			min=(min+max)/2;
+			same=false;
+		    }
+		}
+	    }
+	}
+	return false;
+    }
+    
     public static boolean place(ArrayList input){
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
@@ -138,12 +174,17 @@ public class Board{
 		board[i][n]=(char)' ' ;
 	    }
 	}
+	char[] bird= {'b','i','r','d'};
+	System.out.println(isWord(bird));
 
+	/*
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	while(place(User.placeWord())){
 	    populate(displayBoard,board);
 	    print2d(displayBoard);
 	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
+	    
 	}
+	*/
     }
 }
