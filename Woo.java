@@ -104,7 +104,6 @@ public class Woo{
 	int min=0;
 	int max=535501;
 	boolean same;
-	boolean bob = false;
 	while(min<max){
 	    int i=0;
 	    same=true;
@@ -127,7 +126,7 @@ public class Woo{
 		    }
 		    else{
 			if(i==word.length-1 && i==dictionary[(min+max)/2].length()){
-			    bob=true;
+			    same=true;
 				}
 			min= (min+max)/2 ;
 			same=false;
@@ -135,40 +134,8 @@ public class Woo{
 		}
 	    }
 	}
-	return bob;
     }
-    */
-    public static boolean isWord(ArrayList<Character> word) {
-    int counter = 0;
-    int min = 0;
-    int max = dictionary.length;
-    boolean same = false;
-
-    while(counter < word.size()&& min < max) {
-	if(word.get(counter) == dictionary[(min+max)/2].charAt(counter) ) {
-		counter++;
-    }
-	else if(word.get(counter) > dictionary[(min+max)/2].charAt(counter) ) {
-	    min = ( (min+max) / 2);
-    }
-	else if(word.get(counter) < dictionary[(min+max)/2].charAt(counter) ) {
-	    max =( (min+max) / 2);
-}
-    }
-    for(int i = 0;i<word.size();i++) {
-	if(word.get(i) == dictionary[min].charAt(i) ) {
-	    same = true;
-	}
-	else {
-	    same = false;
-	}
-    }
-    return same;
-    }
-
-
-
-    
+    */    
     public static boolean place(ArrayList input){
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
