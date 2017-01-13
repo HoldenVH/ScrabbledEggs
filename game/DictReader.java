@@ -23,10 +23,12 @@ public class DictReader{
 	    
 	    String l;
 	    int n=lines();
-	    String[] dict=new String[n];
+	    String[] dict=new String[n/2];
 	    
-	    for(int i=0;i<n;i++){
+	    for(int i=0;i<n/2;i++){
+		
 		dict[i]=lineRead.readLine();
+		lineRead.readLine();
 	    }
 	    
 	    lineRead.close();

@@ -101,14 +101,19 @@ public class Board{
     }
 
     public static boolean isWord(String word){ //char[] word){
-	boolean real=false;
+	return true;
+	/*
+	  boolean real=false;
+	System.out.println(dictionary[45326/2].toLowerCase());
 	for(int i=0;i<dictionary.length;i++){
-	    if(dictionary[i].toLowerCase().equals(word.toLowerCase())){
+	    //System.out.println(i);
+	    if(dictionary[i].toLowerCase().equals(word)){
 		real=true;
 	    }
 	}
 	return real;
-	/*
+	*/	
+/*
 	int min=0;
 	int max=535501;
 	//System.out.println(dictionary[100].toCharArray());
@@ -180,7 +185,7 @@ public class Board{
 	    }
 	}
 	//char[] bird={'b','i','r','d'};
-	System.out.println(isWord("zzz"));
+	System.out.println(isWord("\nTHE"));
 
 	/*
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
