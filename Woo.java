@@ -208,16 +208,8 @@ public class Woo{
 		board[i][n]=(char)' ' ;
 	    }
 	}
-	System.out.println("shit here we go");
-	ArrayList<Character> bird= new ArrayList<Character>();
-	bird.add('b');
-	bird.add('i');
-	bird.add('r');
-	bird.add('d');
-	System.out.println(isWord(bird));
-	System.out.println("ADSD");
 
-	/*
+	
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	while(place(User.placeWord())){
 	    populate(displayBoard,board);
@@ -225,6 +217,6 @@ public class Woo{
 	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	    
 	}
-	*/
+	
     }
 }
