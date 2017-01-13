@@ -3,14 +3,14 @@ ScrabbledEggs
 pd3
 
 [X]Print flowchart
-[ ]Create classes
-[ ]create function to accept input of word &test
-[ ]make board
-[ ]test board
-[ ]find/import the scrabble dictionary
+[X]Create classes
+[X]create function to accept input of word &test
+[X]make board
+[X]test board
+[X]find/import the scrabble dictionary
+[X]import cs1
 [ ]Make legality checker
 [ ]test the checker
-[ ]import cs1
 [ ]one person can input words onto the board and have them approved if they are legal
 [ ]make AI to place random words
 [ ]polishing game/menu
