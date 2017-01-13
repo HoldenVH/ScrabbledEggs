@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Board{
     public static String[][] displayBoard = new String[32][32];
-    private static String[] dictionary =DictReader.OpenFile();
+    private static final String[] dictionary =DictReader.OpenFile();
     private static char[][] board=new char[15][15];//actual backend board
     private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     
@@ -99,52 +99,75 @@ public class Board{
 	    }
 	}
     }
-
-    public static boolean isWord(String word){ //char[] word){
-	return true;
-	/*
-	  boolean real=false;
-	System.out.println(dictionary[45326/2].toLowerCase());
-	for(int i=0;i<dictionary.length;i++){
-	    //System.out.println(i);
-	    if(dictionary[i].toLowerCase().equals(word)){
-		real=true;
-	    }
-	}
-	return real;
-	*/	
-/*
+    /*
+    public static boolean isWord(char[] word){
 	int min=0;
 	int max=535501;
-	//System.out.println(dictionary[100].toCharArray());
-	while(min<=max){
+	boolean same;
+	boolean bob = false;
+	while(min<max){
 	    int i=0;
-	    boolean same=true;
+	    same=true;
 	    while(same&& i<word.length && i<dictionary[(min+max)/2].length()){
 		//System.out.println(dictionary[(min+max)/2]);
-		if(word[i]>dictionary[(min+max)/2].charAt(i)){
+		if(word[i]<dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
 		    max=(min+max)/2;
 		    same=false;
-		    //System.out.println("low");
+		    System.out.println("low");
 		}
 		else{
-		    if(word[i]<dictionary[(min+max)/2].charAt(i)){
+		    if(word[i]>dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
 			min=(min+max)/2;
 			same=false;
-			System.out.println(dictionary[(min+max)/2]);
+			for(int n=0;n<1000000;n+=2){
+			    n--;
+			}
+			
+			//	System.out.println((dictionary[(min+max)/2].toLowerCase().toCharArray())[0]);
 		    }
 		    else{
 			if(i==word.length-1 && i==dictionary[(min+max)/2].length()){
-			    return true;
+			    bob=true;
 				}
-			i++;
+			min= (min+max)/2 ;
+			same=false;
 		    }
 		}
 	    }
 	}
-	return false;
-	*/
+	return bob;
     }
+    */
+    public static boolean isWord(ArrayList<Character> word) {
+    int counter = 0;
+    int min = 0;
+    int max = dictionary.length;
+    boolean same = false;
+
+    while(counter < word.size()&& min < max) {
+	if(word.get(counter) == dictionary[(min+max)/2].charAt(counter) ) {
+		counter++;
+    }
+	else if(word.get(counter) > dictionary[(min+max)/2].charAt(counter) ) {
+	    min = ( (min+max) / 2);
+    }
+	else if(word.get(counter) < dictionary[(min+max)/2].charAt(counter) ) {
+	    max =( (min+max) / 2);
+}
+    }
+    for(int i = 0;i<word.size();i++) {
+	if(word.get(i) == dictionary[min].charAt(i) ) {
+	    same = true;
+	}
+	else {
+	    same = false;
+	}
+    }
+    return same;
+    }
+
+
+
     
     public static boolean place(ArrayList input){
 	//gets start pos, adjusts for use with board
@@ -179,13 +202,20 @@ public class Board{
     }
 	
     public static void main(String args[]){
+	System.out.println("huh");
 	for(int i=0;i<board.length;i++){
 	    for(int n=0;n< board.length;n++){
 		board[i][n]=(char)' ' ;
 	    }
 	}
-	//char[] bird={'b','i','r','d'};
-	System.out.println(isWord("\nTHE"));
+	System.out.println("shit here we go");
+	ArrayList<Character> bird= new ArrayList<Character>();
+	bird.add('b');
+	bird.add('i');
+	bird.add('r');
+	bird.add('d');
+	System.out.println(isWord(bird));
+	System.out.println("ADSD");
 
 	/*
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
