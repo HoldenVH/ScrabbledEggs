@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Board{
     public static String[][] displayBoard = new String[32][32];
-    private final String[] dictionary =DictReader.OpenFile();
+    private static String[] dictionary =DictReader.OpenFile();
     private static char[][] board=new char[15][15];//actual backend board
     private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     
@@ -103,12 +103,15 @@ public class Board{
     public static boolean isWord(char[] word){
 	int min=0;
 	int max=535501;
-	while(min<max){
+	System.out.println(dictionary[100].toCharArray());
+	while(false&&min<max){
 	    int i=0;
 	    boolean same=true;
 	    while(same&& i<word.length && i<dictionary[(min+max)/2].length()){
 		//System.out.println(dictionary[(min+max)/2]);
-		if(word[i]<dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
+		char[] dictChar=dictionary[i+10000].toLowerCase().toCharArray();
+		System.out.println(dictChar[2]);
+		if(word[i]<dictChar[i]){
 		    max=(min+max)/2;
 		    same=false;
 		    System.out.println("low");
@@ -124,6 +127,7 @@ public class Board{
 			System.out.println((dictionary[(min+max)/2].toLowerCase().toCharArray())[0]);
 		    }
 		    else{
+			i++;
 			if(i==word.length-1 && i==dictionary[(min+max)/2].length()){
 			    return true;
 				}
