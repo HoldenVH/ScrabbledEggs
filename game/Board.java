@@ -104,24 +104,26 @@ public class Board{
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
 	int y=(int)input.get(1)-1;
-	if(x>14||y>14){
+	if(x>14||y>14||x<0||y<0){
 	    return false;
 	}
 	//right is true down is false
-	boolean dir=(char)input.get(2)=='r';
-	if(!dir && (char)input.get(2)!='d'){
+	boolean dir=((String)input.get(2)).equals("r");
+	System.out.println("foo"+(String)input.get(2)+ "boo");
+	if(!dir && (String)input.get(2)!="d"){
 	    System.out.println("please input valid directions next time");
-	    return false;
+	    // return false;
 	}
+	System.out.println((String)input.get(3));
 	char[] word=((String)input.get(3)).toCharArray();
 	if(dir){
 	    for(int i=0;i<word.length;i++){
-		board[x+i][y]=word[i];
+		board[y][x+i]=word[i];
 	    }
 	}
 	else{
 	    for(int i=0;i<word.length;i++){
-		board[x][y+i]=word[i];
+		board[y+i][x]=word[i];
 	    }
 	}
 	return true;
