@@ -24,6 +24,7 @@ maybe some of these will move into the Obs.Ovrcm section...
 -checking word/move legality
 -setting up score values
 -setting up AI
+-CHECKING VS DICTIONARY
 
 
 COOL STUFF LEARNED
@@ -39,7 +40,7 @@ LESSONS LEARNED
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
 -MVPs are very important
-
+-either we are all really dumb or java is doing something weird
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -65,3 +66,8 @@ David   :: updated flowchart
 Holden  :: updated UML, worked on implementation of words
 David, Henry   :: added numbering to Board, added comments to Board class, worked on checking perpendicular words algo, fixed useLetters algo
 ==============================================================
+
+@2017-1-13
+--------------------------------------------------------------
+
+Holden  :: updated UML, created function to place user-inputted words on to the board where the user specified, imported the scrabble dictionary, horifically failed at checking against the dictionary for reasons unknown.

@@ -1,7 +1,7 @@
 Class:Player(ABSTRACT)
 Description: encompases player and ai
 Vars:ArrayList<char> rack int score
-Functs: int wordScore(int s), ArrayList palceWord(char[][] board);
+Functs: int wordScore(int s)
 
 Class:AI(implementation of player)
 Description:
@@ -11,12 +11,12 @@ Functs:
 Class:User(implementation of player)
 Descrip: player for real person
 Vars:
-Functs: addScore(int i)
+Functs: addScore(int i), static ArrayList palceWord();
 
 Class:Board
 Description:main class of the game, everything runs through here
-Vars:
-Functs: boolean isWord(String w), boolean hasLetters(int x,int y, String w), int checkSides(int x int y, String w)
+Vars:bag, dictionary, board
+Functs: boolean isWord(String w), boolean hasLetters(int x,int y, String w), int checkSides(int x int y, String w), boolean place(ArrayList input), void populate(String[][] board, char[][] base)
 
 Class:Woo
 Description: Driver
