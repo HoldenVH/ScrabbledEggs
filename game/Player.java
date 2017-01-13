@@ -10,5 +10,5 @@ public abstract class Player{
 	return score;//returns updated score
     }
     
-    public abstract ArrayList placeWord(char[][] board);
+    //public abstract ArrayList placeWord(char[][] board);
 }

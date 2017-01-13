@@ -12,7 +12,7 @@ public class User extends Player{
 	name=n;
     }
     
-    public ArrayList placeWord(char[][] board){
+    public static ArrayList placeWord(){
 	ArrayList input=new ArrayList();
 	input.add(Keyboard.readInt());
 	input.add(Keyboard.readInt());
