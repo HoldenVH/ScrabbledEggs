@@ -202,7 +202,7 @@ public class Woo{
     }
 	
     public static void main(String args[]){
-	System.out.println("huh");
+
 	for(int i=0;i<board.length;i++){
 	    for(int n=0;n< board.length;n++){
 		board[i][n]=(char)' ' ;
