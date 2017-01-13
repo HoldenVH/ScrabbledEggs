@@ -104,18 +104,19 @@ public class Board{
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
 	int y=(int)input.get(1)-1;
-	if(x>14||y>14||x<0||y<0){
+	if(x>14||y>14||x<0||y<0){//if user input out of bounds
+	    System.out.println("ERROR: Please input valid COORDINATES next time");
 	    return false;
 	}
 	//right is true down is false
 	boolean dir=((String)input.get(2)).equals("r");
 	//System.out.println("foo"+(String)input.get(2)+ "boo");//diag
-	if(!dir && !((String)input.get(2)).equals("d")){
-	    System.out.println("please input valid directions next time");
+	if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
+	    System.out.println("ERROR: Please input a valid DIRECTION next time");
 	    return false;
 	}
 	//System.out.println((String)input.get(3));//diag
-	char[] word=((String)input.get(3)).toCharArray();
+	char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
 	//enter word horizontally
 	if(dir){
 	    for(int i=0;i<word.length;i++){
@@ -137,7 +138,7 @@ public class Board{
 		board[i][n]=(char)' ' ;
 	    }
 	}
-	
+
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	while(place(User.placeWord())){
 	    populate(displayBoard,board);

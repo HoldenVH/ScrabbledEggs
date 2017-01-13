@@ -14,10 +14,10 @@ public class User extends Player{
     
     public static ArrayList placeWord(){
 	ArrayList input=new ArrayList();
-	input.add(Keyboard.readInt());
-	input.add(Keyboard.readInt());
-	input.add(Keyboard.readWord());
-	input.add(Keyboard.readWord());
+	input.add(Keyboard.readInt());//<x1>
+	input.add(Keyboard.readInt());//<y1>
+	input.add(Keyboard.readWord());//<dir(d/r)>
+	input.add(Keyboard.readWord());//<word>
 	return input;
     }
     public void addLetters(char[] letters){
