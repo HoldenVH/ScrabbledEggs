@@ -27,10 +27,12 @@ public class User extends Player{
     }
     public void useLetters(char[] letters){
 	for(int i=0;i<rack.size();i++)
-	    for(char letter:letters)
+	    for(char letter:letters){
 		if(rack.get(i)==letter){
 		    rack.remove(i);
 		    i--;
+		    break;
 		}
+	    }
     }
 }

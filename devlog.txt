@@ -12,8 +12,9 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
 -WE GOT GREEN 
--board formatting (putting dividing lines between the letters)
--board numbering
+-board formatting (putting dividing lines between the letters) (1/11)
+-board numbering (1/12)
+-added words onto board w/o checking (1/12)
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,6 +62,6 @@ David, Henry   :: worked on Board class
 @2017-01-12
 --------------------------------------------------------------
 David   :: updated flowchart
-Holden  :: updated UML, worked on Player class
-David, Henry   :: added numbering to Board, added comments to Board class
+Holden  :: updated UML, worked on implementation of words
+David, Henry   :: added numbering to Board, added comments to Board class, worked on checking perpendicular words algo, fixed useLetters algo
 ==============================================================
