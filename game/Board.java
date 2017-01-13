@@ -4,7 +4,7 @@ public class Board{
     public static String[][] displayBoard = new String[32][32];
     private final String[] dictionary =DictReader.OpenFile();
     private static char[][] board=new char[15][15];
-
+    private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     
     public String toString(){
 	String retStr = "";
@@ -109,18 +109,20 @@ public class Board{
 	}
 	//right is true down is false
 	boolean dir=((String)input.get(2)).equals("r");
-	System.out.println("foo"+(String)input.get(2)+ "boo");
-	if(!dir && (String)input.get(2)!="d"){
+	//System.out.println("foo"+(String)input.get(2)+ "boo");//diag
+	if(!dir && !((String)input.get(2)).equals("d")){
 	    System.out.println("please input valid directions next time");
-	    // return false;
+	    return false;
 	}
-	System.out.println((String)input.get(3));
+	//System.out.println((String)input.get(3));//diag
 	char[] word=((String)input.get(3)).toCharArray();
+	//enter word horizontally
 	if(dir){
 	    for(int i=0;i<word.length;i++){
 		board[y][x+i]=word[i];
 	    }
 	}
+	//enter word vertically
 	else{
 	    for(int i=0;i<word.length;i++){
 		board[y+i][x]=word[i];
@@ -137,9 +139,10 @@ public class Board{
 	}
 	
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	place(User.placeWord());
-
-	populate(displayBoard,board);
-	print2d(displayBoard);
+	while(place(User.placeWord())){
+	    populate(displayBoard,board);
+	    print2d(displayBoard);
+	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
+	}
     }
 }
