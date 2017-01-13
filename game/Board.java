@@ -100,44 +100,45 @@ public class Board{
 	}
     }
 
-    public static boolean isWord(char[] word){
+    public static boolean isWord(String word){ //char[] word){
+	boolean real=false;
+	for(int i=0;i<dictionary.length;i++){
+	    if(dictionary[i].toLowerCase().equals(word.toLowerCase())){
+		real=true;
+	    }
+	}
+	return real;
+	/*
 	int min=0;
 	int max=535501;
-	System.out.println(dictionary[100].toCharArray());
-	while(false&&min<max){
+	//System.out.println(dictionary[100].toCharArray());
+	while(min<=max){
 	    int i=0;
 	    boolean same=true;
 	    while(same&& i<word.length && i<dictionary[(min+max)/2].length()){
 		//System.out.println(dictionary[(min+max)/2]);
-		char[] dictChar=dictionary[i+10000].toLowerCase().toCharArray();
-		System.out.println(dictChar[2]);
-		if(word[i]<dictChar[i]){
+		if(word[i]>dictionary[(min+max)/2].charAt(i)){
 		    max=(min+max)/2;
 		    same=false;
-		    System.out.println("low");
+		    //System.out.println("low");
 		}
 		else{
-		    if(word[i]>dictionary[(min+max)/2].toLowerCase().toCharArray()[i]){
+		    if(word[i]<dictionary[(min+max)/2].charAt(i)){
 			min=(min+max)/2;
 			same=false;
-			for(int n=0;n<1000000;n+=2){
-			    n--;
-			}
-			
-			System.out.println((dictionary[(min+max)/2].toLowerCase().toCharArray())[0]);
+			System.out.println(dictionary[(min+max)/2]);
 		    }
 		    else{
-			i++;
 			if(i==word.length-1 && i==dictionary[(min+max)/2].length()){
 			    return true;
 				}
-			min=(min+max)/2;
-			same=false;
+			i++;
 		    }
 		}
 	    }
 	}
 	return false;
+	*/
     }
     
     public static boolean place(ArrayList input){
@@ -178,8 +179,8 @@ public class Board{
 		board[i][n]=(char)' ' ;
 	    }
 	}
-	char[] bird= {'b','i','r','d'};
-	System.out.println(isWord(bird));
+	//char[] bird={'b','i','r','d'};
+	System.out.println(isWord("zzz"));
 
 	/*
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
