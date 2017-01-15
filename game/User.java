@@ -18,6 +18,13 @@ public class User extends Player{
 	input.add(Keyboard.readInt());//<y1>
 	input.add(Keyboard.readWord());//<dir(d/r)>
 	input.add(Keyboard.readWord());//<word>
+	if (Board.isWord((String)input.get(3))){
+	    input.add(1);
+	}
+	else{
+	    System.out.println("ERROR: Word not found in dictionary. Please input valid WORD next time");
+	    input.add(0);
+	}
 	return input;
     }
     public void addLetters(char[] letters){

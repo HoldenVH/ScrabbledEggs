@@ -2,10 +2,10 @@ import java.util.ArrayList;
 public abstract class Player{
 
     protected ArrayList<Character> rack;
-    protected int score;
+    protected static int score;
     protected String name;
 
-    public int wordScore(int s){
+    public static int addScore(int s){
 	score+=s;
 	return score;//returns updated score
     }

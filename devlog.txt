@@ -25,6 +25,9 @@ maybe some of these will move into the Obs.Ovrcm section...
 -setting up score values
 -setting up AI
 -CHECKING VS DICTIONARY
+-tell user which way is x and y
+-print board before starting game
+-fix error regarding checking score of criss-crossed words
 
 
 COOL STUFF LEARNED
@@ -34,13 +37,15 @@ wow! oo!...
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 we changed ___ to ___ bc...
+-we changed using BufferedReader to Scanner bc it just wasn't working >:(
+-same reason for linear search vs binary search (MVP);
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
 -MVPs are very important
--either we are all really dumb or java is doing something weird
+-either we are all really dumb or java is doing something weird EDIT: we are dumb.
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
