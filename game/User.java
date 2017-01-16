@@ -18,7 +18,9 @@ public class User extends Player{
 	input.add(Keyboard.readInt());//<y1>
 	input.add(Keyboard.readWord());//<dir(d/r)>
 	input.add(Keyboard.readWord());//<word>
-	if (Board.isWord((String)input.get(3))){
+	int x = (int)input.get(0) - 1;
+	int y = (int)input.get(1) - 1;
+	if (feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != 0 && Board.isWord((String)input.get(3))){
 	    input.add(1);
 	}
 	else{
