@@ -100,7 +100,7 @@ public class Board{
 	//sets spaces between horizontal row borders
 	for (int x = 1; x < args.length; x+=2){
 	    for (int y = 1; y < args[x].length; y+=2){
-		args[x][y] = " ";
+		args[x][y] = "+";
 	    }
 	}
     }
@@ -177,6 +177,8 @@ public class Board{
 	    int endingY;
 	    for (int i = 0; i<word.length(); i++) {
 		if((y != 0 && board[y-1][x+i] != ' ') || (y != 14 && board[y+1][x+i] != ' ')) { //checks above and below
+		    //resets holder string
+		    holderString="";
 		    yUp = 0;
 		    yDown=0;
 		    while(y-yUp >= 0 && board[y-yUp][x+i] != ' ') {
@@ -190,19 +192,20 @@ public class Board{
 		    //board[y-yUp][x+i]
 		    //board[y+yDown][x+i]
 		    holder = new char[endingY-startingY+1];
-		    for(int counter = startingY; counter <= endingY; i++) {
-			holder[i] = board[startingY][x+counter];
+		    for(int counter = startingY; counter <= endingY-startingY; counter++) {
+			holder[counter] = board[startingY][x+counter];
 			holderString += Character.toString(board[startingY][x+counter]);
 		    }
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
 		    }
-		
+		    else{if(!holderString.equals("")){
+			    System .out.println("---------\nINVALID WORD\n-------");
+			}
+		    }
 		}
 	    }
 	}
-
-
 
 	else { //if entered vertically
 	    int xLeft;
@@ -211,6 +214,8 @@ public class Board{
 	    int endingX;
 	    for (int i = 0 ; i < word.length() ; i++) {
 		if((x != 0 && board[y+i][x-1] != ' ') || (x != 14 && board[y+i][x+1] != ' ')) { //checks right and left
+		    //resets holder string
+		    holderString="";
 		    xLeft = 0;
 		    xRight=0;
 		    while(x-xLeft >= 0 && board[y+i][x-xLeft] != ' ') {
@@ -224,12 +229,18 @@ public class Board{
 		    //board[y+i][x-startingX]
 		    //board[y+i][x+startingY]
 		    holder = new char[endingX-startingX+1];
-		    for(int counter = startingX; counter <= endingX; i++) {
-			holder[i] = board[startingX][x+counter];
+		    for(int counter = startingX; counter <= endingX-startingX; counter++) {
+			holder[counter] = board[startingX][x+counter];
 			holderString += Character.toString(board[startingX][x+counter]);
 		    }
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
+			
+		    }
+		    else{if(!holderString.equals("")){
+			    System .out.println("---------\nINVALID WORD\n-------");
+			}
+			System.out.println(holderString);
 		    }
 		}
 	    }
@@ -293,7 +304,6 @@ public class Board{
 	    System.out.println("error");
 	}
 	//*/
-	System.out.println("huh");
 	for(int i=0;i<board.length;i++){
 	    for(int n=0;n< board.length;n++){
 		board[i][n]=(char)' ' ;
