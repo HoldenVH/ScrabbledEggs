@@ -80,6 +80,7 @@ David, Henry   :: added numbering to Board, added comments to Board class, worke
 --------------------------------------------------------------
 Holden  :: updated UML, created function to place user-inputted words on to the board where the user specified, imported the scrabble dictionary, horifically failed at checking against the dictionary for reasons unknown.
 David, Henry :: worked on feedWord and scoreWord to implement into isWord that Holden failed at implementing. tried to help Holden with isWord
+==============================================================
 
 @2017-01-15
 --------------------------------------------------------------
@@ -87,4 +88,11 @@ Holden  :: fixed feedWord branch checker
 Henry  :: implemented binary dictionary checker, implemented scoring algorithm
 David :: implemented temporary board (with help from Henry) 
 Team ScrabbledEggs  :: went to bed
+==============================================================
+
+@2017-01-16
+--------------------------------------------------------------
+Holden :: implemented touching(), now all words after the first one must be in contact with another word for them to be placed.
+Henry ::
+David ::
 ==============================================================
