@@ -1,12 +1,15 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class Board{
     public static String[][] displayBoard = new String[32][32];
     private static char[][] board=new char[15][15];//actual backend board
     private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
-    private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+    private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
+    public static ArrayList<String> dictionary = new ArrayList<String>(267751);
     
     public String toString(){
 	String retStr = "";
@@ -102,6 +105,7 @@ public class Board{
 	}
     }
 
+    /*
     //checks if input is a word
     public static boolean isWord(String word) {
 	File file = new File("dictionary.txt");
@@ -121,6 +125,34 @@ public class Board{
 	}
 	return false;
     }
+    */
+
+    public static boolean isWord(String word){
+	word = word.toUpperCase();
+	int middle;
+	int highest = dictionary.size();
+	//System.out.println(dictionary.size());
+	int first = 0;
+	middle = highest/2;
+	//System.out.println(word);
+	
+	while(first < highest){
+	    //System.out.println(dictionary.get(middle));
+	    if(dictionary.get(middle).compareTo(word)>0){
+		highest = middle;
+		middle /= 2;
+	    }
+	    else if (dictionary.get(middle).compareTo(word)<0){
+		first = middle + 1;
+		middle = (middle+highest)/2;
+	    }
+	    else{
+		return true;
+	    }
+	}
+	return false;
+    }
+    
 
     //scores word
     public static int scoreWord(char[] word) {
@@ -245,9 +277,22 @@ public class Board{
 	    return false;
 	}
     }
-	
+
+
+    
     public static void main(String args[]){
-	//*
+	try{
+	    FileReader reader = new FileReader("dictionary.txt");
+	    Scanner scanner = new Scanner(reader);	
+	    for(int x = 0; scanner.hasNextLine(); x++){
+		dictionary.add(scanner.nextLine());
+	    }			
+	    scanner.close();
+	}
+	catch(FileNotFoundException e){
+	    System.out.println("error");
+	}
+	//*/
 	System.out.println("huh");
 	for(int i=0;i<board.length;i++){
 	    for(int n=0;n< board.length;n++){
@@ -269,7 +314,7 @@ public class Board{
 	    populate(displayBoard,board);
 	    print2d(displayBoard);
 	    System.out.println("Turn score: " + wordScore);
-	    System.out.println("Score of User now:" + User.score);
+	    System.out.println("Score of User now: " + User.score);
 	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	    
 	}
