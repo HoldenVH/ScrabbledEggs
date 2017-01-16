@@ -137,14 +137,14 @@ public class Board{
 	//System.out.println(word);
 	
 	while(first < highest){
-	    //System.out.println(dictionary.get(middle));
+	    System.out.println(middle);
 	    if(dictionary.get(middle).compareTo(word)>0){
 		highest = middle;
-		middle /= 2;
+		middle = (first+highest)/2;
 	    }
 	    else if (dictionary.get(middle).compareTo(word)<0){
 		first = middle + 1;
-		middle = (middle+highest)/2;
+		middle = (first+highest)/2;
 	    }
 	    else{
 		return true;
