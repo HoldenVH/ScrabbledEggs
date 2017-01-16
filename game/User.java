@@ -13,7 +13,7 @@ public class User extends Player{
     }
   
     public static ArrayList placeWord(){
-	ArrayList input=new ArrayList();
+	ArrayList input=new ArrayList(5);
 	input.add(Keyboard.readInt());//<x1>
 	input.add(Keyboard.readInt());//<y1>
 	input.add(Keyboard.readWord());//<dir(d/r)>

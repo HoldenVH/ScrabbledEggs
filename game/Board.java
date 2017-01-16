@@ -11,6 +11,8 @@ public class Board{
     private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
     public static ArrayList<String> dictionary = new ArrayList<String>(267751);
+    private static boolean first=true;
+
     
     public String toString(){
 	String retStr = "";
@@ -138,6 +140,71 @@ public class Board{
     }
     */
 
+    public static boolean touching(ArrayList input){
+	int x=(int)input.get(0)-1;
+	int y=(int)input.get(1)-1;
+	String dir=(String)input.get(2);
+	String word=(String)input.get(3);
+	if(dir.equals("r")&&y>0&&y<14){
+	    for(int row=y-1;row<y+2;row++){
+		for(int column=x;column<=word.length();column++){
+		    if(board[row][column]!=' '){
+			return true;
+		    }
+		}
+	    }
+	}
+	else{if(y==0){
+		for(int row=y;row<y+2;row++){
+		    for(int column=x;column<=word.length();column++){
+			if(board[row][column]!=' '){
+			    return true;
+			}
+		    }
+		}
+	    }
+	    if(y==14){
+		 for(int row=y-1;row<y+1;row++){
+		     for(int column=x;column<=word.length();column++){
+			 if(board[row][column]!=' '){
+			     return true;
+			 }
+		     }
+		 }
+	    }
+	}
+	if(dir.equals("d")&&x>0&&x<14){
+	    for(int column=x-1;column<x+2;column++){
+		for(int row=x;row<=word.length();row++){
+		    if(board[column][row]!=' '){
+			return true;
+		    }
+		}
+	    }
+	}
+	else{if(x==0){
+		for(int column=x;column<x+2;column++){
+		    for(int row=x;row<=word.length();row++){
+			if(board[column][row]!=' '){
+			    return true;
+			}
+		    }
+		}
+	    }
+	    if(x==14){
+		for(int column=x-1;column<x+1;column++){
+		    for(int row=x;row<=word.length();row++){
+			if(board[column][row]!=' '){
+			    return true;
+			}
+		    }
+		}
+	    }
+	}
+	System.out.println("--------------\nINVALID LOCATION\n--------------");
+	return first;
+    }
+    
     public static boolean isWord(String word){
 	word = word.toUpperCase();
 	int middle;
@@ -148,7 +215,7 @@ public class Board{
 	//System.out.println(word);
 	
 	while(first < highest){ //searches until min matches max
-	    System.out.println(middle);
+	    //System.out.println(middle);//diag
 	    //if word  in second half of dictionary
 	    if(dictionary.get(middle).compareTo(word)>0){
 		highest = middle;
@@ -287,7 +354,6 @@ public class Board{
     //==============================================================================
    
     public static boolean placeTemp(ArrayList input){
-	if (((int) input.get(4)) == 1){
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
 	int y=(int)input.get(1)-1;
@@ -317,66 +383,59 @@ public class Board{
 	    for(int i=0;i<word.length;i++){
 		boardTemp[y+i][x]=word[i];
 	    }
-	}		
+	}
 	return true;
-	}
-
-	else{
-	    return false;
-	}
-	
-    }
+}
     //--------------------------------------------------------------------------------------
      public static boolean place(ArrayList input){
-        placeTemp(input);
-	if (((int) input.get(4)) == 1){
-	//gets start pos, adjusts for use with board
-   	int x=(int)input.get(0)-1;
-	int y=(int)input.get(1)-1;
-	if(x>14||y>14||x<0||y<0){//if user input out of bounds
-	    System.out.println("ERROR: Please input valid COORDINATES next time");
-	    return false;
-	}
-	//right is true down is false
-	boolean dir=((String)input.get(2)).equals("r");
-	//System.out.println("foo"+(String)input.get(2)+ "boo");
-	if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
-	    System.out.println("ERROR: Please input a valid DIRECTION next time");
-	    return false;
-	}
-	//System.out.println((String)input.get(3));//diag
-       	char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
-	//System.out.println(wordScore);
-	//enter word horizontally
-	if(dir){
-	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
-		for(int i=0;i<word.length;i++){
-		board[y][x+i]=word[i];
-		}
-		
-	    }
-	    else {
+	 if (((int) input.get(4)) == 1 && touching(input)&&placeTemp(input)){
+	    //gets start pos, adjusts for use with board
+	    int x=(int)input.get(0)-1;
+	    int y=(int)input.get(1)-1;
+	    if(x>14||y>14||x<0||y<0){//if user input out of bounds
+		System.out.println("ERROR: Please input valid COORDINATES next time");
 		return false;
 	    }
-	}
-	//enter word vertically
-	else{
-	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
-		for(int i=0;i<word.length;i++){
-		board[y+i][x]=word[i];
+	    //right is true down is false
+	    boolean dir=((String)input.get(2)).equals("r");
+	    //System.out.println("foo"+(String)input.get(2)+ "boo");
+	    if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
+		System.out.println("ERROR: Please input a valid DIRECTION next time");
+		return false;
+	    }
+	    //System.out.println((String)input.get(3));//diag
+	    char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
+	    //System.out.println(wordScore);
+	    //enter word horizontally
+	    if(dir){
+		if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
+		    for(int i=0;i<word.length;i++){
+			board[y][x+i]=word[i];
+		    }
+		    
+		}
+		else {
+		    return false;
 		}
 	    }
-	    else {
-		return false;
-	    }	
+	    //enter word vertically
+	    else{
+		if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
+		    for(int i=0;i<word.length;i++){
+			board[y+i][x]=word[i];
+		    }
+		}
+		else {
+		    return false;
+		}	
+	    }
+	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1) {
+		wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
+		User.addScore(wordScore);
+	    }
+	    first=false;
+	    return true;
 	}
-	if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1) {
-        wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
-	User.addScore(wordScore);
-	}
-	return true;
-	}
-	
 	else{
 	    return false;
 	}
