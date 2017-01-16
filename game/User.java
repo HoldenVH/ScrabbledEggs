@@ -11,7 +11,7 @@ public class User extends Player{
 	this();
 	name=n;
     }
-    
+  
     public static ArrayList placeWord(){
 	ArrayList input=new ArrayList();
 	input.add(Keyboard.readInt());//<x1>
@@ -20,12 +20,18 @@ public class User extends Player{
 	input.add(Keyboard.readWord());//<word>
 	int x = (int)input.get(0) - 1;
 	int y = (int)input.get(1) - 1;
-	if (feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != 0 && Board.isWord((String)input.get(3))){
+	String inputstr = (String)input.get(3);
+	if(Board.emptyCheck() && Board.isWord(inputstr) ){
+	    input.add(1);
+	}
+	else {
+	    if (Board.isWord(inputstr) ){
 	    input.add(1);
 	}
 	else{
 	    System.out.println("ERROR: Word not found in dictionary. Please input valid WORD next time");
 	    input.add(0);
+	}
 	}
 	return input;
     }

@@ -9,9 +9,9 @@ pd3
 [X]test board
 [X]find/import the scrabble dictionary
 [X]import cs1
-[ ]Make legality checker
-[ ]test the checker
-[ ]one person can input words onto the board and have them approved if they are legal
+[x]Make legality checker
+[x]test the checker
+[x]one person can input words onto the board and have them approved if they are legal
 [ ]make AI to place random words
 [ ]polishing game/menu
 [ ]Improve AI

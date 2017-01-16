@@ -15,30 +15,34 @@ wow we so BOSS bc...
 -board formatting (putting dividing lines between the letters) (1/11)
 -board numbering (1/12)
 -added words onto board w/o checking (1/12)
+-checking word/move legality(1/15)
+-CHECKING VS DICTIONARY (1/15)
+-fix error regarding checking score of criss-crossed words (1/15)
+
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 blah blah pesky bug...
 maybe some of these will move into the Obs.Ovrcm section...
 
--checking word/move legality
--setting up score values
+-setting up score values(double/triple letter/word)
 -setting up AI
--CHECKING VS DICTIONARY
 -tell user which way is x and y
 -print board before starting game
--fix error regarding checking score of criss-crossed words
+
 
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow! oo!...
+TEMP BOARDS <3
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 we changed ___ to ___ bc...
 -we changed using BufferedReader to Scanner bc it just wasn't working >:(
 -same reason for linear search vs binary search (MVP);
+-adjusted our program to use a temporary board and an easier (and working) approach.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,3 +80,11 @@ David, Henry   :: added numbering to Board, added comments to Board class, worke
 --------------------------------------------------------------
 Holden  :: updated UML, created function to place user-inputted words on to the board where the user specified, imported the scrabble dictionary, horifically failed at checking against the dictionary for reasons unknown.
 David, Henry :: worked on feedWord and scoreWord to implement into isWord that Holden failed at implementing. tried to help Holden with isWord
+
+@2017-01-15
+--------------------------------------------------------------
+Holden  :: fixed feedWord branch checker
+Henry  :: implemented binary dictionary checker, implemented scoring algorithm
+David :: implemented temporary board (with help from Henry) 
+Team ScrabbledEggs  :: went to bed
+==============================================================

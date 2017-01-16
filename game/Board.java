@@ -6,6 +6,7 @@ import java.io.FileReader;
 public class Board{
     public static String[][] displayBoard = new String[32][32];
     private static char[][] board=new char[15][15];//actual backend board
+    private static char[][] boardTemp = new char[15][15]; //temp backend board
     private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
@@ -20,6 +21,16 @@ public class Board{
 	    retStr += "";
 	}
 	return retStr;
+    }
+    public static boolean emptyCheck() {
+    	for(int i=0;i< board.length;i++){
+	    for(int n=0;n< board.length;n++){
+		if(board[i][n] !=(char)' '){
+		    return false;
+		}
+	    }
+	}
+	return true;
     }
     public static void print2d( String[][] a ) { 
 	for( int i = 0; i < a.length; i++ ) {
@@ -136,20 +147,24 @@ public class Board{
 	middle = highest/2;
 	//System.out.println(word);
 	
-	while(first < highest){
+	while(first < highest){ //searches until min matches max
 	    System.out.println(middle);
+	    //if word  in second half of dictionary
 	    if(dictionary.get(middle).compareTo(word)>0){
 		highest = middle;
 		middle = (first+highest)/2;
 	    }
+	    //if word in first half of dictionary
 	    else if (dictionary.get(middle).compareTo(word)<0){
 		first = middle + 1;
 		middle = (first+highest)/2;
 	    }
+	    //reaches only if dictionary.get(middle).compareTo(word) = 0, so the word must be in the dictionary 
 	    else{
 		return true;
 	    }
 	}
+	//if dictionary has been completely scanned through
 	return false;
     }
     
@@ -166,7 +181,11 @@ public class Board{
 	return retScore;
     }
 
+    //=======================================================
+    //all branches legit -> score, any wrong->0
     public static int feedWord(int x, int y, char dir, String word) {
+	System.out.println("real y:    " + y);
+	System.out.println("real x:    " + x);
 	char[] holder;
 	String holderString = "";
 	int retScore = 0;
@@ -175,32 +194,49 @@ public class Board{
 	    int yDown;
 	    int startingY;
 	    int endingY;
+	    //checks each letter of placed word for intersections
 	    for (int i = 0; i<word.length(); i++) {
-		if((y != 0 && board[y-1][x+i] != ' ') || (y != 14 && board[y+1][x+i] != ' ')) { //checks above and below
+		if((y != 0 && boardTemp[y-1][x+i] != ' ') || (y != 14 && boardTemp[y+1][x+i] != ' ')) { //checks above and below
 		    //resets holder string
 		    holderString="";
 		    yUp = 0;
 		    yDown=0;
-		    while(y-yUp >= 0 && board[y-yUp][x+i] != ' ') {
+		    
+		    while(y-yUp > 0 && boardTemp[y-yUp-1][x+i] != ' ') {
 			yUp+=1;
 		    }
-		    while(y+yDown <= 14 && board[y+yDown][x+i] != ' '){
+		    while(y+yDown < 14 && boardTemp[y+yDown+1][x+i] != ' '){
 			yDown+=1;
 		    }
 		    startingY = y-yUp;
 		    endingY = y+yDown;
-		    //board[y-yUp][x+i]
-		    //board[y+yDown][x+i]
+		    System.out.println("---------------------------------");
+		    System.out.println("yUp:    "+ yUp);
+		    System.out.println("yDown:    " + yDown);
+		    System.out.println("-----------------------------------------------");
+		    System.out.println("startingY:     " + startingY);
+		    System.out.println("endingY:     " + endingY);
+		    //boardTemp[y-yUp][x+i]
+		    //boardTemp[y+yDown][x+i]
+
+		    //sets size of holder char[]
 		    holder = new char[endingY-startingY+1];
-		    for(int counter = startingY; counter <= endingY-startingY; counter++) {
-			holder[counter] = board[startingY][x+counter];
-			holderString += Character.toString(board[startingY][x+counter]);
+		    //
+		    for(int counter = 0; counter <= endingY-startingY; counter++) {
+			holder[counter] = boardTemp[startingY+counter][x + i];
+			holderString += Character.toString(boardTemp[startingY+counter][x+i]);
+		       
+			System.out.println("Counter:   " + counter);
+			System.out.println("BoardTemp:" + Character.toString(boardTemp[startingY+counter][x+i]) + "|");
+			System.out.println("holderString:     " + holderString);
 		    }
+		    System.out.println(holderString);
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
 		    }
 		    else{if(!holderString.equals("")){
-			    System .out.println("---------\nINVALID WORD\n-------");
+			    System.out.println("---------\nINVALID WORD\n-------");
+			    return -1;
 			}
 		    }
 		}
@@ -213,32 +249,33 @@ public class Board{
 	    int startingX;
 	    int endingX;
 	    for (int i = 0 ; i < word.length() ; i++) {
-		if((x != 0 && board[y+i][x-1] != ' ') || (x != 14 && board[y+i][x+1] != ' ')) { //checks right and left
+		if((x != 0 && boardTemp[y+i][x-1] != ' ') || (x != 14 && boardTemp[y+i][x+1] != ' ')) { //checks right and left
 		    //resets holder string
 		    holderString="";
 		    xLeft = 0;
 		    xRight=0;
-		    while(x-xLeft >= 0 && board[y+i][x-xLeft] != ' ') {
+		    while(x-xLeft > 0 && boardTemp[y+i][x-xLeft-1] != ' ') {
 			xLeft+=1;
 		    }
-		    while(x+xRight <= 14 && board[y+i][x+xRight] != ' '){
+		    while(x+xRight < 14 && boardTemp[y+i][x+xRight+1] != ' '){
 			xRight+=1;
 		    }
 		    startingX = x-xLeft;
 		    endingX = x+xRight;
-		    //board[y+i][x-startingX]
-		    //board[y+i][x+startingY]
+		    //boardTemp[y+i][x-startingX]
+		    //boardTemp[y+i][x+startingY]
 		    holder = new char[endingX-startingX+1];
-		    for(int counter = startingX; counter <= endingX-startingX; counter++) {
-			holder[counter] = board[startingX][x+counter];
-			holderString += Character.toString(board[startingX][x+counter]);
+		    for(int counter = 0; counter <= endingX-startingX; counter++) {
+			holder[counter] = boardTemp[y+i][startingX+counter];
+			holderString += Character.toString(boardTemp[y+i][startingX+counter]);
 		    }
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
 			
 		    }
 		    else{if(!holderString.equals("")){
-			    System .out.println("---------\nINVALID WORD\n-------");
+			    System.out.println("---------\nINVALID WORD\n-------");
+			    return -1;
 			}
 			System.out.println(holderString);
 		    }
@@ -247,9 +284,9 @@ public class Board{
 	}
 	return retScore;
     }
-
+    //==============================================================================
    
-    public static boolean place(ArrayList input){
+    public static boolean placeTemp(ArrayList input){
 	if (((int) input.get(4)) == 1){
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
@@ -267,30 +304,85 @@ public class Board{
 	}
 	//System.out.println((String)input.get(3));//diag
 	char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
-	wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
-	User.addScore(wordScore);
+
 	//System.out.println(wordScore);
 	//enter word horizontally
 	if(dir){
 	    for(int i=0;i<word.length;i++){
-		board[y][x+i]=word[i];
+		boardTemp[y][x+i]=word[i];
 	    }
 	}
 	//enter word vertically
 	else{
 	    for(int i=0;i<word.length;i++){
-		board[y+i][x]=word[i];
+		boardTemp[y+i][x]=word[i];
 	    }
-	}
+	}		
 	return true;
-    }
+	}
+
 	else{
 	    return false;
 	}
+	
     }
-
-
-    
+    //--------------------------------------------------------------------------------------
+     public static boolean place(ArrayList input){
+        placeTemp(input);
+	if (((int) input.get(4)) == 1){
+	//gets start pos, adjusts for use with board
+   	int x=(int)input.get(0)-1;
+	int y=(int)input.get(1)-1;
+	if(x>14||y>14||x<0||y<0){//if user input out of bounds
+	    System.out.println("ERROR: Please input valid COORDINATES next time");
+	    return false;
+	}
+	//right is true down is false
+	boolean dir=((String)input.get(2)).equals("r");
+	//System.out.println("foo"+(String)input.get(2)+ "boo");
+	if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
+	    System.out.println("ERROR: Please input a valid DIRECTION next time");
+	    return false;
+	}
+	//System.out.println((String)input.get(3));//diag
+       	char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
+	//System.out.println(wordScore);
+	//enter word horizontally
+	if(dir){
+	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
+		for(int i=0;i<word.length;i++){
+		board[y][x+i]=word[i];
+		}
+		
+	    }
+	    else {
+		return false;
+	    }
+	}
+	//enter word vertically
+	else{
+	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
+		for(int i=0;i<word.length;i++){
+		board[y+i][x]=word[i];
+		}
+	    }
+	    else {
+		return false;
+	    }	
+	}
+	if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1) {
+        wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
+	User.addScore(wordScore);
+	}
+	return true;
+	}
+	
+	else{
+	    return false;
+	}
+	
+     }
+    //-----------------------------------------------------------------------------------
     public static void main(String args[]){
 	try{
 	    FileReader reader = new FileReader("dictionary.txt");
@@ -307,6 +399,7 @@ public class Board{
 	for(int i=0;i<board.length;i++){
 	    for(int n=0;n< board.length;n++){
 		board[i][n]=(char)' ' ;
+		boardTemp[i][n]=(char)' ';
 	    }
 	}
 
