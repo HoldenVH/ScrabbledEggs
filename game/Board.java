@@ -471,6 +471,8 @@ public class Board{
 	*/
 
 	//*
+	populate(displayBoard,board);
+	print2d(displayBoard);
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
 	while(place(User.placeWord())){
 	    populate(displayBoard,board);
