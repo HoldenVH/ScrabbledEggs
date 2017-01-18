@@ -166,7 +166,7 @@ checks to see if words after the first word are touching existing words
 	if(dir.equals("r")&&y>0&&y<14){
 	    for(int row=y-1;row<y+2;row++){
 		for(int column=x;column<=x+word.length();column++){
-		    if(board[column][row]!=' '){
+		    if(board[row][column]!=' '){
 			return true;
 		    }
 		}
@@ -175,16 +175,16 @@ checks to see if words after the first word are touching existing words
 	else{if(y==0){
 		for(int row=y;row<y+2;row++){
 		    for(int column=x;column<=x+word.length();column++){
-			if(board[column][row]!=' '){
+			if(board[row][column]!=' '){
 			    return true;
 			}
 		    }
 		}
 	    }
 	    if(y==14){
-		 for(int row=y-1;row<y+1;row++){
-		     for(int column=x;column<=x+word.length();column++){
-			 if(board[column][row]!=' '){
+		 for(int row=y-1;row<y;row++){
+		     for(int column=x;column<x+word.length();column++){
+			 if(board[row][column]!=' '){
 			     return true;
 			 }
 		     }
@@ -194,7 +194,7 @@ checks to see if words after the first word are touching existing words
 	if(dir.equals("d")&&x>0&&x<14){
 	    for(int column=x-1;column<x+2;column++){
 		for(int row=y;row<=y+word.length();row++){
-		    if(board[column][row]!=' '){
+		    if(board[row][column]!=' '){
 			return true;
 		    }
 		}
@@ -203,7 +203,7 @@ checks to see if words after the first word are touching existing words
 	else{if(x==0){
 		for(int column=x;column<x+2;column++){
 		    for(int row=y;row<=y+word.length();row++){
-			if(board[column][row]!=' '){
+			if(board[row][column]!=' '){
 			    return true;
 			}
 		    }
@@ -211,8 +211,8 @@ checks to see if words after the first word are touching existing words
 	    }
 	    if(x==14){
 		for(int column=x-1;column<x+1;column++){
-		    for(int row=y;row<=y+word.length();row++){
-			if(board[column][row]!=' '){
+		    for(int row=y;row<y+word.length();row++){
+			if(board[row][column]!=' '){
 			    return true;
 			}
 		    }
