@@ -1,3 +1,5 @@
+package game;
+
 import cs1.Keyboard;
 import java.util.ArrayList;
 

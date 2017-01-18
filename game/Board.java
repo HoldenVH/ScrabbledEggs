@@ -1,7 +1,10 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
 
 public class Board{
     public static String[][] displayBoard = new String[32][32];
