@@ -24,14 +24,11 @@ public class User extends Player{
 	if(Board.emptyCheck() && Board.isWord(inputstr) ){
 	    input.add(1);
 	}
-	else {
-	    if (Board.isWord(inputstr) ){
+	else if(Board.isWord(inputstr) ) { 
 	    input.add(1);
 	}
 	else{
-	    System.out.println("ERROR: Word not found in dictionary. Please input valid WORD next time");
 	    input.add(0);
-	}
 	}
 	return input;
     }

@@ -12,6 +12,7 @@ public class Board{
     private static int wordScore;
     public static ArrayList<String> dictionary = new ArrayList<String>(267751);
     private static boolean first=true;
+    private static boolean running=true;
 
         /*==================================================
 	  displays base board
@@ -474,12 +475,19 @@ creates temporary board with word placed to check legality
 	}
 	
      }
-    //-----------------------------------------------------------------------------------
 
+    public static void setRunningFalse() {
+	running = false;
+    }
+	
+    //-----------------------------------------------------------------------------------
+    
     /*====================
 ONE METHOD TO RULE THEM ALL
       ====================*/
     public static void play(){
+	String quitcheck = "";
+	ArrayList input;
 	try{
 	    FileReader reader = new FileReader("dictionary.txt");
 	    Scanner scanner = new Scanner(reader);	
@@ -506,21 +514,36 @@ ONE METHOD TO RULE THEM ALL
 	    System.out.println(dictionary[x]);
 	}
 	*/
+       	while(running) {
 	populate(displayBoard,board);
 	print2d(displayBoard);
-	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	while(place(User.placeWord())){
-	    populate(displayBoard,board);
-	    print2d(displayBoard);
+	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
+       	input = User.placeWord();
+	quitcheck=(String)input.get(3);
+	System.out.println("You entered:" + quitcheck);
+	if(place(input)){
+	    // populate(displayBoard,board);
+	    // print2d(displayBoard);
 	    System.out.println("Turn score: " + wordScore);
 	    System.out.println("Score of User now: " + User.score);
 	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	    
 	}
-    }
+	else if(quitcheck.equals("iquit")) {
+	    System.out.println("Thanks for playing");
+	    System.out.println("You scored a total of " + User.score + " points");
+	    setRunningFalse();
+	}
+	else {
+	    System.out.println("That is not a word");
+	}
+	}
+    
+    } 	    
+    
+
 
     
     public static void main(String args[]){
-	play();
+	//	play();
     }
 }
