@@ -476,9 +476,6 @@ public class Board{
 	
     }
 
-    public static void setRunningFalse() {
-	running = false;
-    }
 	
     //-----------------------------------------------------------------------------------
     
@@ -531,7 +528,7 @@ public class Board{
 	    else if(quitcheck.equals("iquit")) {
 		System.out.println("Thanks for playing");
 		System.out.println("You scored a total of " + User.score + " points");
-		setRunningFalse();
+	        running=false;
 	    }
 	    else {
 		System.out.println("That is not a word");
