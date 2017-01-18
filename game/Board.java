@@ -14,8 +14,8 @@ public class Board{
     private static boolean first=true;
     private static boolean running=true;
 
-        /*==================================================
-	  displays base board
+    /*==================================================
+      displays base board
       ==================================================*/
 
     public String toString(){
@@ -30,7 +30,7 @@ public class Board{
     }
 
     /*==================================================
-checks if anything has been placed on the board
+      checks if anything has been placed on the board
       ==================================================*/
     public static boolean emptyCheck() {
     	for(int i=0;i< board.length;i++){
@@ -43,8 +43,8 @@ checks if anything has been placed on the board
 	return true;
     }
 
-        /*==================================================
-generalized print for 2d arrays
+    /*==================================================
+      generalized print for 2d arrays
       ==================================================*/
     public static void print2d( String[][] a ) { 
 	for( int i = 0; i < a.length; i++ ) {
@@ -54,8 +54,8 @@ generalized print for 2d arrays
 	}
     }
 
-        /*==================================================
-makes the board that will be displayed from the char array base
+    /*==================================================
+      makes the board that will be displayed from the char array base
       ==================================================*/
     public static void populate(String args[][], char[][] base){
 	args[0][0] = "  ";
@@ -137,27 +137,27 @@ makes the board that will be displayed from the char array base
     /*
     //checks if input is a word
     public static boolean isWord(String word) {
-	File file = new File("dictionary.txt");
-        try {
-	    Scanner sc = new Scanner(file);
-	    while(sc.hasNextLine()) {
-		//System.out.println(sc.nextLine());
-		//System.out.println(sc.nextLine().equals(word));
-	        String lowercase = sc.nextLine().toLowerCase();
-		if(lowercase.equals(word)) {
-		    return true;
-		}
-	    }
-	}
-	catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	}
-	return false;
+    File file = new File("dictionary.txt");
+    try {
+    Scanner sc = new Scanner(file);
+    while(sc.hasNextLine()) {
+    //System.out.println(sc.nextLine());
+    //System.out.println(sc.nextLine().equals(word));
+    String lowercase = sc.nextLine().toLowerCase();
+    if(lowercase.equals(word)) {
+    return true;
+    }
+    }
+    }
+    catch (FileNotFoundException e) {
+    e.printStackTrace();
+    }
+    return false;
     }
     */
 
     /*==================================================
-checks to see if words after the first word are touching existing words
+      checks to see if words after the first word are touching existing words
       ==================================================*/
     public static boolean touching(ArrayList input){
 	int x=(int)input.get(0)-1;
@@ -183,13 +183,13 @@ checks to see if words after the first word are touching existing words
 		}
 	    }
 	    if(y==14){
-		 for(int row=y-1;row<y;row++){
-		     for(int column=x;column<x+word.length();column++){
-			 if(board[row][column]!=' '){
-			     return true;
-			 }
-		     }
-		 }
+		for(int row=y-1;row<y;row++){
+		    for(int column=x;column<x+word.length();column++){
+			if(board[row][column]!=' '){
+			    return true;
+			}
+		    }
+		}
 	    }
 	}
 	if(dir.equals("d")&&x>0&&x<14){
@@ -228,8 +228,8 @@ checks to see if words after the first word are touching existing words
 
     
     /*==================================================
-checks if word is in scrabble dictionary
-==================================================*/
+      checks if word is in scrabble dictionary
+      ==================================================*/
     public static boolean isWord(String word){
 	word = word.toUpperCase();
 	int middle;
@@ -305,12 +305,12 @@ checks if word is in scrabble dictionary
 		    startingY = y-yUp;
 		    endingY = y+yDown;
 		    /*
-		    System.out.println("---------------------------------");
-		    System.out.println("yUp:    "+ yUp);
-		    System.out.println("yDown:    " + yDown);
-		    System.out.println("-----------------------------------------------");
-		    System.out.println("startingY:     " + startingY);
-		    System.out.println("endingY:     " + endingY);
+		      System.out.println("---------------------------------");
+		      System.out.println("yUp:    "+ yUp);
+		      System.out.println("yDown:    " + yDown);
+		      System.out.println("-----------------------------------------------");
+		      System.out.println("startingY:     " + startingY);
+		      System.out.println("endingY:     " + endingY);
 		    *///lots of diagnostics
 		    //boardTemp[y-yUp][x+i]
 		    //boardTemp[y+yDown][x+i]
@@ -322,13 +322,13 @@ checks if word is in scrabble dictionary
 			holder[counter] = boardTemp[startingY+counter][x + i];
 			holderString += Character.toString(boardTemp[startingY+counter][x+i]);
 			/*
-			System.out.println("Counter:   " + counter);
-			System.out.println("BoardTemp:" + Character.toString(boardTemp[startingY+counter][x+i]) + "|");
-			System.out.println("holderString:     " + holderString);
+			  System.out.println("Counter:   " + counter);
+			  System.out.println("BoardTemp:" + Character.toString(boardTemp[startingY+counter][x+i]) + "|");
+			  System.out.println("holderString:     " + holderString);
 			*/
 		    }/*
-		    System.out.println(holderString);
-			*///no such thing as too many diagnostic print statements
+		       System.out.println(holderString);
+		     *///no such thing as too many diagnostic print statements
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
 		    }
@@ -385,8 +385,8 @@ checks if word is in scrabble dictionary
 
     
     /*=========================================================================
-creates temporary board with word placed to check legality
-   ===========================================================================*/
+      creates temporary board with word placed to check legality
+      ===========================================================================*/
     public static boolean placeTemp(ArrayList input){
 	//gets start pos, adjusts for use with board
    	int x=(int)input.get(0)-1;
@@ -419,10 +419,10 @@ creates temporary board with word placed to check legality
 	    }
 	}
 	return true;
-}
+    }
     //--------------------------------------------------------------------------------------
-     public static boolean place(ArrayList input){
-	 if (((int) input.get(4)) == 1 && touching(input)&&placeTemp(input)){
+    public static boolean place(ArrayList input){
+	if (((int) input.get(4)) == 1 && touching(input)&&placeTemp(input)){
 	    //gets start pos, adjusts for use with board
 	    int x=(int)input.get(0)-1;
 	    int y=(int)input.get(1)-1;
@@ -474,7 +474,7 @@ creates temporary board with word placed to check legality
 	    return false;
 	}
 	
-     }
+    }
 
     public static void setRunningFalse() {
 	running = false;
@@ -483,7 +483,7 @@ creates temporary board with word placed to check legality
     //-----------------------------------------------------------------------------------
     
     /*====================
-ONE METHOD TO RULE THEM ALL
+      ONE METHOD TO RULE THEM ALL
       ====================*/
     public static void play(){
 	String quitcheck = "";
@@ -510,32 +510,32 @@ ONE METHOD TO RULE THEM ALL
 	//System.out.println(isWord("bird"));
 
 	/*
-	for (int x = 0; x < 10; x++){
-	    System.out.println(dictionary[x]);
-	}
+	  for (int x = 0; x < 10; x++){
+	  System.out.println(dictionary[x]);
+	  }
 	*/
        	while(running) {
-	populate(displayBoard,board);
-	print2d(displayBoard);
-	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
-       	input = User.placeWord();
-	quitcheck=(String)input.get(3);
-	System.out.println("You entered:" + quitcheck);
-	if(place(input)){
-	    // populate(displayBoard,board);
-	    // print2d(displayBoard);
-	    System.out.println("Turn score: " + wordScore);
-	    System.out.println("Score of User now: " + User.score);
-	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	}
-	else if(quitcheck.equals("iquit")) {
-	    System.out.println("Thanks for playing");
-	    System.out.println("You scored a total of " + User.score + " points");
-	    setRunningFalse();
-	}
-	else {
-	    System.out.println("That is not a word");
-	}
+	    populate(displayBoard,board);
+	    print2d(displayBoard);
+	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
+	    input = User.placeWord();
+	    quitcheck=(String)input.get(3);
+	    System.out.println("You entered:" + quitcheck);
+	    if(place(input)){
+		// populate(displayBoard,board);
+		// print2d(displayBoard);
+		System.out.println("Turn score: " + wordScore);
+		System.out.println("Score of User now: " + User.score);
+		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
+	    }
+	    else if(quitcheck.equals("iquit")) {
+		System.out.println("Thanks for playing");
+		System.out.println("You scored a total of " + User.score + " points");
+		setRunningFalse();
+	    }
+	    else {
+		System.out.println("That is not a word");
+	    }
 	}
     
     } 	    
