@@ -6,4 +6,4 @@ Running Woo.java will generate a 15x15 Scrabble board and racks. The racks will 
 //Enter the number of players (not yet implemented)</br>
 Follow prompt; enter the x,y position that your word begins at, its direction, and the word itself</br>
 Play until game ends, if you wish to quit enter any acceptable x,y, and dir, and input iquit as your word</br>
-Enjoy!
+Enjoy!!!
