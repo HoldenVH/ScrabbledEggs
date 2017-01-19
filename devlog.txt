@@ -93,6 +93,10 @@ Team ScrabbledEggs  :: went to bed
 @2017-01-16
 --------------------------------------------------------------
 Holden :: implemented touching(), now all words after the first one must be in contact with another word for them to be placed.
-Henry ::
-David ::
 ==============================================================
+
+@2017-01-18
+--------------------------------------------------------------
+Holden :: formatted root directory
+Henry ::worked on rack implementation, implemented new rack methods,
+David ::fixed touching algo, implemented new rack methods

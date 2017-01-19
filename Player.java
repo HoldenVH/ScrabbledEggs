@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 public abstract class Player{
 
-    protected ArrayList<Character> rack;
+    protected static ArrayList<Character> rack = new ArrayList<Character>(7);
     protected static int score;
     protected String name;
 

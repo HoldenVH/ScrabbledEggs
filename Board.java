@@ -8,7 +8,8 @@ public class Board{
     public static String[][] displayBoard = new String[32][32];
     private static char[][] board=new char[15][15];//actual backend board
     private static char[][] boardTemp = new char[15][15]; //temp backend board
-    private final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
+    public static final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
+    public static ArrayList<Character> BAG = new ArrayList<Character>(STARTING_BAG.length);
     private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
     public static ArrayList<String> dictionary = new ArrayList<String>(267751);
@@ -29,7 +30,14 @@ public class Board{
 	}
 	return retStr;
     }
-
+    /*==================================================
+populates ArrayList that holds game bag
+     ==================================================*/
+    public static void populateBag() {
+	for(char a:STARTING_BAG) {
+	    BAG.add(a);
+	}
+    }
     /*==================================================
 checks if anything has been placed on the board
       ==================================================*/
@@ -555,9 +563,10 @@ creates temporary board with word placed to check legality
 ONE METHOD TO RULE THEM ALL
       ====================*/
     public static void play(){
+       	ArrayList input;
 	String quitcheck = "";
 	int boundcheck;
-	ArrayList input;
+	char[] lettersUsed;//splits word input into chars
 	try{
 	    FileReader reader = new FileReader("dictionary.txt");
 	    Scanner scanner = new Scanner(reader);	
@@ -577,6 +586,10 @@ ONE METHOD TO RULE THEM ALL
 	    }
 	}
 
+	populateBag();
+	//System.out.println(BAG.size() );
+	User.populateRack();
+	//System.out.println(BAG.size() );
 	//System.out.println(isWord("bird"));
 
 	/*
@@ -585,16 +598,23 @@ ONE METHOD TO RULE THEM ALL
 	}
 	*/
        	while(running) {
+	User.addLetters(User.drawBag(7-User.rack.size() ));
 	populate(displayBoard,board);
 	print2d(displayBoard);
+        System.out.println("Rack before word entered");
+	System.out.println(User.getRack() );
 	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
        	input = User.placeWord();
 	quitcheck=(String)input.get(3);
 	boundcheck=(int)input.get(4);
+	lettersUsed=quitcheck.toCharArray();
 	System.out.println("You entered:" + quitcheck);
 	if(place(input)){
 	    // populate(displayBoard,board);
 	    // print2d(displayBoard);
+	    User.useLetters(lettersUsed);
+	    System.out.println("Rack after word entered");
+	    System.out.println(User.getRack() );
 	    System.out.println("Turn score: " + wordScore);
 	    System.out.println("Score of User now: " + User.score);
 	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");

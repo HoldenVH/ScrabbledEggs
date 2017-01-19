@@ -11,7 +11,7 @@ public class User extends Player{
     public User(String n){
 	this();
 	name=n;
-    }
+    } 
   
     public static ArrayList placeWord(){
 	ArrayList input=new ArrayList(5);
@@ -39,20 +39,46 @@ public class User extends Player{
 	}
 	return input;
     }
-    public void addLetters(char[] letters){
+    public static String getRack() {
+	String retStr = "RACK: ";
+	for(char a:rack) {
+	    retStr+= a + ",";
+	}
+	return retStr.substring(0,retStr.length()-1);
+    }
+    
+    public static void populateRack() {
+	addLetters(drawBag(7));
+    }
+    public static char[] drawBag(int numdraws) {
+	char[] retArr = new char[numdraws];
+	for(int i = 0;i < numdraws;i++) {
+	    int a =(int)( Math.random()*Board.BAG.size() );
+	    retArr[i]=Board.BAG.get(a);
+	    Board.BAG.remove(a);
+	}
+	return retArr;
+    }
+		
+    public static void addLetters(char[] letters){
 	for(char letter:letters){
 	    rack.add(letter);
 	}
     }
-    public void useLetters(char[] letters){
-	for(int i=0;i<rack.size();i++)
-	    for(char letter:letters){
-		if(rack.get(i)==letter){
+    public static void useLetters(char[] letters){
+	System.out.println(rack.size());
+	for(char letter:letters){
+	    System.out.println(letter);
+	    for(int i=0;i<rack.size();i++) {
+		System.out.println("second for called");
+		if(Character.toLowerCase(rack.get(i))==letter){
+		    System.out.println("if loop called");
 		    rack.remove(i);
+		    System.out.println(getRack() );
 		    i--;
 		    break;
 		}
 	    }
+	}
     }
 }
-
