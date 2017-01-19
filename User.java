@@ -1,4 +1,3 @@
-package game;
 
 import cs1.Keyboard;
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ public class User extends Player{
 	String dirstr = (String)input.get(2);
 	String inputstr = (String)input.get(3);
 	//check if entry is within bounds
-	if( (dirstr.equals("r")&&(x+inputstr.length() > 16) )
+	if( (dirstr.equals("r")&&(x+inputstr.length() >= 16) )
 	    ||
-	    (dirstr.equals("d")&&(y+inputstr.length() > 16) ) ){
+	    (dirstr.equals("d")&&(y+inputstr.length() >= 16) ) ){
 	    input.add(2);//signifies out of bounds
 	}
 	//now check if entry is a word
