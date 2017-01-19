@@ -165,57 +165,128 @@ checks to see if words after the first word are touching existing words
 	int y=(int)input.get(1)-1;
 	String dir=(String)input.get(2);
 	String word=(String)input.get(3);
-	if(dir.equals("r")&&y>0&&y<14){
-	    for(int row=y-1;row<y+2;row++){
-		for(int column=x;column<=x+word.length();column++){
-		    if(board[row][column]!=' '){
-			return true;
+	if(dir.equals("r")) {
+		if (y>0 && y<14){
+		    if(x+word.length() == 15) {
+			for(int row=y-1;row<y+2;row++){
+			    for(int column=x;column<x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
+			}
+		    }
+	    
+		    else {
+			for(int row=y-1;row<y+2;row++){
+			    for(int column=x;column<=x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
+			}
 		    }
 		}
-	    }
-	}
-	else{if(y==0){
-		for(int row=y;row<y+2;row++){
-		    for(int column=x;column<=x+word.length();column++){
-			if(board[row][column]!=' '){
-			    return true;
+		else if(y==0){
+		    if(x+word.length() == 15) {
+			for(int row=y;row<y+2;row++){
+			    for(int column=x;column<x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
+			}
+		    }
+		    else {
+			for(int row=y;row<y+2;row++){
+			    for(int column=x;column<=x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
+			}
+		    }
+		}
+		else if(y==14){
+		    if(x+word.length() == 15) {
+			for(int row=y-1;row<y;row++){
+			    for(int column=x;column<x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
+			}
+		    }
+		    else {
+			for(int row=y-1;row<y;row++){
+			    for(int column=x;column<=x+word.length();column++){
+				if(board[row][column]!=' '){
+				    return true;
+				}
+			    }
 			}
 		    }
 		}
 	    }
-	    if(y==14){
-		 for(int row=y-1;row<y;row++){
-		     for(int column=x;column<x+word.length();column++){
-			 if(board[row][column]!=' '){
-			     return true;
-			 }
-		     }
-		 }
-	    }
-	}
-	if(dir.equals("d")&&x>0&&x<14){
-	    for(int column=x-1;column<x+2;column++){
-		for(int row=y;row<=y+word.length();row++){
-		    if(board[row][column]!=' '){
-			return true;
+       
+	if(dir.equals("d") ){
+	    if (x > 0 && x < 14) {
+		if(y+word.length() == 15) {
+		    for(int column=x-1;column<x+2;column++){
+			for(int row=y;row<y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
+			}
 		    }
 		}
-	    }
-	}
-	else{if(x==0){
-		for(int column=x;column<x+2;column++){
-		    for(int row=y;row<=y+word.length();row++){
-			if(board[row][column]!=' '){
-			    return true;
+		else {
+		    for(int column=x-1;column<x+2;column++){
+			for(int row=y;row<=y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
 			}
 		    }
 		}
 	    }
-	    if(x==14){
-		for(int column=x-1;column<x+1;column++){
-		    for(int row=y;row<y+word.length();row++){
-			if(board[row][column]!=' '){
-			    return true;
+	    else if(x==0){
+        	if(y+word.length() == 15) {
+		    for(int column=x;column<x+2;column++){
+			for(int row=y;row<y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
+			}
+		    }
+		}
+		else {    
+		    for(int column=x;column<x+2;column++){
+			for(int row=y;row<=y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
+			}
+		    }
+		}
+	    }
+	    else if(x==14){
+		if(y+word.length() == 15) {
+		    for(int column=x-1;column<x+1;column++){
+			for(int row=y;row<y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
+			}
+		    }
+		}
+
+		else {
+		    for(int column=x-1;column<x+1;column++){
+			for(int row=y;row<=y+word.length();row++){
+			    if(board[row][column]!=' '){
+				return true;
+			    }
 			}
 		    }
 		}
