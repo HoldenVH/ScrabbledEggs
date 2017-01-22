@@ -653,6 +653,11 @@ ONE METHOD TO RULE THEM ALL
 	    else{
 		System.out.println("That is not a word");
 	    }
+	    for(int i=0;i<board.length;i++){
+		for(int n=0;n<board[i].length;n++){
+		    boardTemp[i][n]=board[i][n];
+		}
+	    }
 	}
     
     } 	    
