@@ -65,8 +65,8 @@ public class User extends Player{
 	    rack.add(letter);
 	}
     }
-    public static boolean useLetters(char[] letters){
-	System.out.println(rack.size());
+
+    public static boolean hasLetters(char[] letters){
 	//checks if letters are there
 	for(char letter:letters){
 	    boolean present=false;
@@ -80,20 +80,23 @@ public class User extends Player{
 		return false;
 	    }
 	}
+	return true;
+    }
+    public static void useLetters(char[] letters){
+	System.out.println(rack.size());
 	//if they are, removes
 	for(char letter:letters){
-	    System.out.println(letter);
+	    // System.out.println(letter);
 	    for(int i=0;i<rack.size();i++) {
-		System.out.println("second for called");
+		//		System.out.println("second for called");
 		if(Character.toLowerCase(rack.get(i))==letter){
-		    System.out.println("if loop called");
+		    //		    System.out.println("if loop called");
 		    rack.remove(i);
-		    System.out.println(getRack() );
+		    //System.out.println(getRack() );
 		    i--;
 		    break;
 		}
 	    }
 	}
-	return true;
     }
 }
