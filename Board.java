@@ -521,31 +521,51 @@ creates temporary board with word placed to check legality
 	    char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
 	    //System.out.println(wordScore);
 	    //enter word horizontally
+
+	    ArrayList<Character> lettersNeeded=new ArrayList<Character>();
 	    if(dir){
-		if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
-		    for(int i=0;i<word.length;i++){
-			board[y][x+i]=word[i];
+		for(int i=0;i<word.length;i++){
+		    if(board[y][x+i]==' '){
+			lettersNeeded.add(word[i]);
 		    }
-		    
-		}
-		else {
-		    return false;
-		}
+		}   
 	    }
 	    //enter word vertically
 	    else{
-		if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1 || emptyCheck() ) {
+		
+		for(int i=0;i<word.length;i++){
+		    if(board[y+i][x]==' '){
+			lettersNeeded.add(word[i]);
+		    }
+		}
+	    }
+	    char[] lettersUsed=new char[lettersNeeded.size()];
+	    for(int i=0;i<lettersNeeded.size();i++){
+		lettersUsed[i]=lettersNeeded.get(i);
+	    }
+	    if(!User.hasLetters(lettersUsed)){
+		return false;
+	    }
+
+	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1){
+		if(dir){
+     		    for(int i=0;i<word.length;i++){
+			board[y][x+i]=word[i];
+		    }   
+		}
+		//enter word vertically
+		else{
+		
 		    for(int i=0;i<word.length;i++){
 			board[y+i][x]=word[i];
 		    }
 		}
-		else {
-		    return false;
-		}	
-	    }
-	    if(feedWord(x,y,input.get(2).toString().charAt(0),(String)input.get(3)) != -1) {
-		wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
+    		wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
 		User.addScore(wordScore);
+		User.useLetters(lettersUsed);
+	    }
+	    else {
+		return false;
 	    }
 	    first=false;
 	    return true;
@@ -555,7 +575,9 @@ creates temporary board with word placed to check legality
 	}
 	
      }
-	
+
+
+    
     //-----------------------------------------------------------------------------------
     
     /*====================
@@ -608,10 +630,9 @@ ONE METHOD TO RULE THEM ALL
 	    boundcheck=(int)input.get(4);
 	    lettersUsed=quitcheck.toCharArray();
 	    System.out.println("You entered:" + quitcheck);
-	    if(User.useLetters(lettersUsed)&&place(input)){
+	    if(place(input)){
 		// populate(displayBoard,board);
 		// print2d(displayBoard);
-	    
 		System.out.println("Rack after word entered");
 		System.out.println(User.getRack() );
 		System.out.println("Turn score: " + wordScore);
@@ -626,7 +647,7 @@ ONE METHOD TO RULE THEM ALL
 		System.out.println("You scored a total of " + User.score + " points");
 		running=false;
 	    }
-	    else if(!User.useLetters(lettersUsed)){
+	    else if(!User.hasLetters(lettersUsed)){
 		System.out.println("wrong letters");
 	    }
 	    else{
