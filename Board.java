@@ -362,8 +362,9 @@ checks if word is in scrabble dictionary
 		for(int counter = 0; counter <= endingX-startingX; counter++) {
 		    holder[counter] = boardTemp[y][startingX+counter];
 		    holderString += Character.toString(boardTemp[y][startingX+counter]);
-		    if (isWord(holderString)){
+		    if (isWord(holderString) ){
 			retScore += scoreWord(holder);
+			//	retScore -= scoreWord(word);
 		    }
 		    else{if(!holderString.equals("")){
 			    System.out.println("---------\nINVALID WORD\n-------");
@@ -397,8 +398,11 @@ checks if word is in scrabble dictionary
 			holderString += Character.toString(boardTemp[startingY+counter][x+i]);
 		
 		    }
-		    if (isWord(holderString)){
+		    if (isWord(holderString)&& board[y][x+i]==' ' ){
 			retScore += scoreWord(holder);
+			
+		    }
+		    else if(isWord(holderString) ) {
 		    }
 		    else{if(!holderString.equals("")){
 			    System.out.println("---------\nINVALID WORD\n-------");
@@ -432,6 +436,7 @@ checks if word is in scrabble dictionary
 		    holderString += Character.toString(boardTemp[startingY+counter][x]);
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
+			//retScore -= scoreWord(word);
 		    }
 		    else{if(!holderString.equals("")){
 			    System.out.println("---------\nINVALID WORD\n-------");
@@ -462,9 +467,11 @@ checks if word is in scrabble dictionary
 			holder[counter] = boardTemp[y+i][startingX+counter];
 			holderString += Character.toString(boardTemp[y+i][startingX+counter]);
 		    }
-		    if (isWord(holderString)){
+		    if (isWord(holderString)&& board[y+i][x]==' ' ){
 			retScore += scoreWord(holder);
 			
+		    }
+		    else if(isWord(holderString) ) {
 		    }
 		    else{if(!holderString.equals("")){
 			    System.out.println("---------\nINVALID WORD\n-------");
@@ -599,6 +606,7 @@ ONE METHOD TO RULE THEM ALL
 	String quitcheck = "";
 	int boundcheck;
 	char[] lettersUsed;//splits word input into chars
+	boolean running = true;
 	try{
 	    FileReader reader = new FileReader("dictionary.txt");
 	    Scanner scanner = new Scanner(reader);	
@@ -631,7 +639,7 @@ ONE METHOD TO RULE THEM ALL
 	System.out.println("You intrepid warriors are now to set out on a vicious battle to the death, or, preferably, the higher score when the bag runs out of letters. Keep in mind that this game of Scrabble is mad hardcore, yo, and that entering an incorrect word will forfeit your turn!\n Players, take your marks,\nget set,\nGO!");
 
 	//gamePlay
-       	while(BAG.size()>= 7-p1.rack.size()) {
+       	while(running && BAG.size()>= 7-p1.rack.size()) {
 	    for(Player p: players){
 		System.out.println("Score of "+p1.name+ " now: " + p1.score);
 		System.out.println("Score of "+p2.name+ " now: " + p2.score);
@@ -642,7 +650,7 @@ ONE METHOD TO RULE THEM ALL
 		print2d(displayBoard);
 		System.out.println("Rack before word entered");
 		System.out.println(p.getRack() );
-		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
+		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and: rerollrack - to get a new rack or iquit - to end the game");
 		input = p.placeWord();
 		quitcheck=(String)input.get(3);
 		boundcheck=(int)input.get(4);
@@ -656,12 +664,22 @@ ONE METHOD TO RULE THEM ALL
 		    System.out.println(p.getRack() );
 		    System.out.println("Turn score: " + wordScore);
 		}
+		else if(quitcheck.equals("iquit")) {
+		    running=false;
+		    break;
+		}
+		else if(quitcheck.equals("rerollrack")) {
+		    for(char a: p.rack) {
+			BAG.add(a);
+		    }
+		    p.rack=new ArrayList<Character>(7);
+		    p.populateRack();
+		    System.out.println("YOUR NEW " + p.getRack());
+		}
 		else if(boundcheck == 2) {
 		    System.out.println("Entry was out of bounds");
 		}
-		else if(quitcheck.equals("iquit")) {
-		    break;
-		}
+
 		else if(!isWord(quitcheck) ) {
 		    System.out.println("That is not a word");
 		}
