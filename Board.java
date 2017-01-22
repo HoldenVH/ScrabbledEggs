@@ -8,14 +8,15 @@ public class Board{
     public static String[][] displayBoard = new String[32][32];
     private static char[][] board=new char[15][15];//actual backend board
     private static char[][] boardTemp = new char[15][15]; //temp backend board
-    public static final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
+    public static final char[] STARTING_BAG={'G','A','M','B','I','T','S','A','T'};
+    //   public static final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     public static ArrayList<Character> BAG = new ArrayList<Character>(STARTING_BAG.length);
     private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
     public static ArrayList<String> dictionary = new ArrayList<String>(267751);
     private static boolean first=true;
     private static boolean running=true;
-
+    
         /*==================================================
 	  displays base board
       ==================================================*/
@@ -363,11 +364,46 @@ checks if word is in scrabble dictionary
 	char[] holder;
 	String holderString = "";
 	int retScore = 0;
+	int xLeft;
+	int xRight;
+	int startingX;
+	int endingX;
+	int yUp;
+	int yDown;
+	int startingY;
+	int endingY;
 	if(dir == 'r') { //if entered horizontally
-	    int yUp;
-	    int yDown;
-	    int startingY;
-	    int endingY;
+	      if((x != 0 && boardTemp[y][x-1] != ' ') || (x+word.length() <= 14 && boardTemp[y][x+word.length()] != ' ')) { 
+		//resets holder string
+		holderString="";
+		xLeft = 0;
+		xRight=0;
+		    
+		while(x-xLeft > 0 && boardTemp[y][x-xLeft-1] != ' ') {
+		    xLeft+=1;
+		}
+		while(x+word.length()+xRight <= 14 && boardTemp[y][x+word.length()+xRight] != ' '){
+		    xRight+=1;
+		}
+		startingX = x-xLeft;
+		endingX = x+word.length()-1+xRight;
+		//sets size of holder char[]
+		      holder = new char[endingX-startingX+1];
+		//
+		for(int counter = 0; counter <= endingX-startingX; counter++) {
+		    holder[counter] = boardTemp[y][startingX+counter];
+		    holderString += Character.toString(boardTemp[y][startingX+counter]);
+		    if (isWord(holderString)){
+			retScore += scoreWord(holder);
+		    }
+		    else{if(!holderString.equals("")){
+			    System.out.println("---------\nINVALID WORD\n-------");
+			    return -1;
+			}
+		    }
+		}
+	    }
+
 	    //checks each letter of placed word for intersections
 	    for (int i = 0; i<word.length(); i++) {
 		if((y != 0 && boardTemp[y-1][x+i] != ' ') || (y != 14 && boardTemp[y+1][x+i] != ' ')) { //checks above and below
@@ -422,10 +458,37 @@ checks if word is in scrabble dictionary
 	}
 
 	else { //if entered vertically
-	    int xLeft;
-	    int xRight;
-	    int startingX;
-	    int endingX;
+	    if((y != 0 && boardTemp[y-1][x] != ' ') || (y+word.length() <= 14 && boardTemp[y+word.length()][x] != ' ')) { 
+		//resets holder string
+		holderString="";
+		yUp = 0;
+		yDown=0;
+		    
+		while(y-yUp > 0 && boardTemp[y-yUp-1][x] != ' ') {
+		    yUp+=1;
+		}
+		while(y+word.length()+yDown <= 14 && boardTemp[y+word.length()+yDown][x] != ' '){
+		    yDown+=1;
+		}
+		startingY = y-yUp;
+		endingY = y+word.length()-1+yDown;
+		//sets size of holder char[]
+		      holder = new char[endingY-startingY+1];
+		//
+		for(int counter = 0; counter <= endingY-startingY; counter++) {
+		    holder[counter] = boardTemp[startingY+counter][x];
+		    holderString += Character.toString(boardTemp[startingY+counter][x]);
+		    if (isWord(holderString)){
+			retScore += scoreWord(holder);
+		    }
+		    else{if(!holderString.equals("")){
+			    System.out.println("---------\nINVALID WORD\n-------");
+			    return -1;
+			}
+		    }
+		}
+	    }
+	    
 	    for (int i = 0 ; i < word.length() ; i++) {
 		if((x != 0 && boardTemp[y+i][x-1] != ' ') || (x != 14 && boardTemp[y+i][x+1] != ' ')) { //checks right and left
 		    //resets holder string
@@ -459,6 +522,7 @@ checks if word is in scrabble dictionary
 		    }
 		}
 	    }
+	    
 	}
 	return retScore;
     }
@@ -618,7 +682,7 @@ ONE METHOD TO RULE THEM ALL
 	  System.out.println(dictionary[x]);
 	  }
 	*/
-       	while(running) {
+       	while(running && BAG.size()>= 7-User.rack.size()) {
 	    User.addLetters(User.drawBag(7-User.rack.size() ));
 	    populate(displayBoard,board);
 	    print2d(displayBoard);
@@ -647,18 +711,24 @@ ONE METHOD TO RULE THEM ALL
 		System.out.println("You scored a total of " + User.score + " points");
 		running=false;
 	    }
+	    else if(!isWord(quitcheck) ) {
+		System.out.println("That is not a word");
+	    }
 	    else if(!User.hasLetters(lettersUsed)){
 		System.out.println("wrong letters");
 	    }
-	    else{
-		System.out.println("That is not a word");
-	    }
+	   
+	    
+	    System.out.println("SUFFERING LEFT: " +  BAG.size() );
 	    for(int i=0;i<board.length;i++){
 		for(int n=0;n<board[i].length;n++){
 		    boardTemp[i][n]=board[i][n];
 		}
 	    }
 	}
+	System.out.println("Bag ran out of letters");
+       	System.out.println("Thanks for playing");
+       	System.out.println("You scored a total of " + User.score + " points");
     
     } 	    
         
