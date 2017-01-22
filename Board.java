@@ -1,22 +1,22 @@
 
+import cs1.Keyboard;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.InterruptedException;
 
 public class Board{
     public static String[][] displayBoard = new String[32][32];
     private static char[][] board=new char[15][15];//actual backend board
     private static char[][] boardTemp = new char[15][15]; //temp backend board
-    //  public static final char[] STARTING_BAG={'G','A','M','B','I','T','S','A','T'};
     public static final char[] STARTING_BAG={'A','A','A','A','A','A','A','A','A','B','B','C','C','D','D','D','D','E','E','E','E','E','E','E','E','E','E','E','E','F','F','G','G','G','H','H','I','I','I','I','I','I','I','I','I','J','K','L','L','L','L','M','M','N','N','N','N','N','N','O','O','O','O','O','O','O','O','Q','R','R','R','R','R','R','S','S','S','S','T','T','T','T','T','T','U','U','U','U','V','V','W','W','X','Y','Y','Z'};
     public static ArrayList<Character> BAG = new ArrayList<Character>(STARTING_BAG.length);
     private static int[] score = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};//score of each letter in scrabble
     private static int wordScore;
     public static ArrayList<String> dictionary = new ArrayList<String>(267751);
     private static boolean first=true;
-    private static boolean running=true;
-    
+        
         /*==================================================
 	  displays base board
       ==================================================*/
@@ -121,7 +121,7 @@ makes the board that will be displayed from the char array base
 	//sets letter values
 	for (int x = 2; x < args.length; x+=2){
 	    for (int y = 2; y < args[x].length; y+=2){
-		args[x][y] = Character.toString(base[x/2-1][y/2-1]);
+		args[x][y] = Character.toString(Character.toUpperCase(base[x/2-1][y/2-1]));
 	    }
 	}
 	//creates vertical column borders
@@ -143,28 +143,6 @@ makes the board that will be displayed from the char array base
 	    }
 	}
     }
-
-    /*
-    //checks if input is a word
-    public static boolean isWord(String word) {
-	File file = new File("dictionary.txt");
-        try {
-	    Scanner sc = new Scanner(file);
-	    while(sc.hasNextLine()) {
-		//System.out.println(sc.nextLine());
-		//System.out.println(sc.nextLine().equals(word));
-	        String lowercase = sc.nextLine().toLowerCase();
-		if(lowercase.equals(word)) {
-		    return true;
-		}
-	    }
-	}
-	catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	}
-	return false;
-    }
-    */
 
     /*==================================================
 checks to see if words after the first word are touching existing words
@@ -315,13 +293,9 @@ checks if word is in scrabble dictionary
 	word = word.toUpperCase();
 	int middle;
 	int highest = dictionary.size();
-	//System.out.println(dictionary.size());
 	int first = 0;
 	middle = highest/2;
-	//System.out.println(word);
-	
 	while(first < highest){ //searches until min matches max
-	    //System.out.println(middle);//diag
 	    //if word  in second half of dictionary
 	    if(dictionary.get(middle).compareTo(word)>0){
 		highest = middle;
@@ -347,10 +321,7 @@ checks if word is in scrabble dictionary
     public static int scoreWord(char[] word) {
 	int retScore = 0;
 	for(int i = 0; i < word.length; i++){
-	    //System.out.println(word[i] - 97 + "letter num");
-	    //System.out.println(score[word[i] - 97]);
 	    retScore += score[word[i] - 97];
-	    //System.out.println(retScore);
 	}
 	return retScore;
     }
@@ -359,8 +330,6 @@ checks if word is in scrabble dictionary
     //all branches legit -> score, any wrong->-1
     //=======================================================
     public static int feedWord(int x, int y, char dir, String word) {
-	//System.out.println("real y:    " + y);//diag
-	//System.out.println("real x:    " + x);//diag
 	char[] holder;
 	String holderString = "";
 	int retScore = 0;
@@ -420,31 +389,14 @@ checks if word is in scrabble dictionary
 		    }
 		    startingY = y-yUp;
 		    endingY = y+yDown;
-		    /*
-		    System.out.println("---------------------------------");
-		    System.out.println("yUp:    "+ yUp);
-		    System.out.println("yDown:    " + yDown);
-		    System.out.println("-----------------------------------------------");
-		    System.out.println("startingY:     " + startingY);
-		    System.out.println("endingY:     " + endingY);
-		    *///lots of diagnostics
-		    //boardTemp[y-yUp][x+i]
-		    //boardTemp[y+yDown][x+i]
-
+		    
 		    //sets size of holder char[]
 		    holder = new char[endingY-startingY+1];
-		    //
 		    for(int counter = 0; counter <= endingY-startingY; counter++) {
 			holder[counter] = boardTemp[startingY+counter][x + i];
 			holderString += Character.toString(boardTemp[startingY+counter][x+i]);
-			/*
-			System.out.println("Counter:   " + counter);
-			System.out.println("BoardTemp:" + Character.toString(boardTemp[startingY+counter][x+i]) + "|");
-			System.out.println("holderString:     " + holderString);
-			*/
-		    }/*
-		    System.out.println(holderString);
-			*///no such thing as too many diagnostic print statements
+		
+		    }
 		    if (isWord(holderString)){
 			retScore += scoreWord(holder);
 		    }
@@ -541,15 +493,12 @@ creates temporary board with word placed to check legality
 	}
 	//right is true down is false
 	boolean dir=((String)input.get(2)).equals("r");
-	//System.out.println("foo"+(String)input.get(2)+ "boo");
 	if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
 	    System.out.println("ERROR: Please input a valid DIRECTION next time");
 	    return false;
 	}
-	//System.out.println((String)input.get(3));//diag
 	char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
 
-	//System.out.println(wordScore);
 	//enter word horizontally
 	if(dir){
 	    for(int i=0;i<word.length;i++){
@@ -564,8 +513,11 @@ creates temporary board with word placed to check legality
 	}
 	return true;
 }
+
+
+    
     //--------------------------------------------------------------------------------------
-     public static boolean place(ArrayList input){
+    public static boolean place(ArrayList input, Player p){
 	 if (((int) input.get(4)) == 1 && touching(input)&&placeTemp(input)){
 	    //gets start pos, adjusts for use with board
 	    int x=(int)input.get(0)-1;
@@ -576,14 +528,11 @@ creates temporary board with word placed to check legality
 	    }
 	    //right is true down is false
 	    boolean dir=((String)input.get(2)).equals("r");
-	    //System.out.println("foo"+(String)input.get(2)+ "boo");
 	    if(!dir && !((String)input.get(2)).equals("d")){//if input is not d or r
 		System.out.println("ERROR: Please input a valid DIRECTION next time");
 		return false;
 	    }
-	    //System.out.println((String)input.get(3));//diag
 	    char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
-	    //System.out.println(wordScore);
 	    //enter word horizontally
 
 	    ArrayList<Character> lettersNeeded=new ArrayList<Character>();
@@ -607,7 +556,7 @@ creates temporary board with word placed to check legality
 	    for(int i=0;i<lettersNeeded.size();i++){
 		lettersUsed[i]=lettersNeeded.get(i);
 	    }
-	    if(!User.hasLetters(lettersUsed)){
+	    if(!p.hasLetters(lettersUsed)){
 		return false;
 	    }
 
@@ -625,8 +574,8 @@ creates temporary board with word placed to check legality
 		    }
 		}
     		wordScore = scoreWord(word) + feedWord(x,y, input.get(2).toString().charAt(0), (String)input.get(3));//sets score of word
-		User.addScore(wordScore);
-		User.useLetters(lettersUsed);
+		p.addScore(wordScore);
+		p.useLetters(lettersUsed);
 	    }
 	    else {
 		return false;
@@ -639,8 +588,6 @@ creates temporary board with word placed to check legality
 	}
 	
      }
-
-
     
     //-----------------------------------------------------------------------------------
     
@@ -670,69 +617,75 @@ ONE METHOD TO RULE THEM ALL
 		boardTemp[i][n]=(char)' ';
 	    }
 	}
-
+	//setup
 	populateBag();
-	//System.out.println(BAG.size() );
-	User.populateRack();
-	//System.out.println(BAG.size() );
-	//System.out.println(isWord("bird"));
+	System.out.println("Player 1, state your name:");
+	Player p1=new User(Keyboard.readWord());
 
-	/*
-	  for (int x = 0; x < 10; x++){
-	  System.out.println(dictionary[x]);
-	  }
-	*/
-       	while(running && BAG.size()>= 7-User.rack.size()) {
-	    User.addLetters(User.drawBag(7-User.rack.size() ));
-	    populate(displayBoard,board);
-	    print2d(displayBoard);
-	    System.out.println("Rack before word entered");
-	    System.out.println(User.getRack() );
-	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
-	    input = User.placeWord();
-	    quitcheck=(String)input.get(3);
-	    boundcheck=(int)input.get(4);
-	    lettersUsed=quitcheck.toCharArray();
-	    System.out.println("You entered:" + quitcheck);
-	    if(place(input)){
-		// populate(displayBoard,board);
-		// print2d(displayBoard);
-		System.out.println("Rack after word entered");
-		System.out.println(User.getRack() );
-		System.out.println("Turn score: " + wordScore);
-		System.out.println("Score of User now: " + User.score);
-		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	    }
-	    else if(boundcheck == 2) {
-		System.out.println("Entry was out of bounds");
-	    }
-	    else if(quitcheck.equals("iquit")) {
-		System.out.println("Thanks for playing");
-		System.out.println("You scored a total of " + User.score + " points");
-		running=false;
-	    }
-	    else if(!isWord(quitcheck) ) {
-		System.out.println("That is not a word");
-	    }
-	    else if(!User.hasLetters(lettersUsed)){
-		System.out.println("wrong letters");
-	    }
-	   
+	System.out.println("Player 2, state your name:");
+	Player p2=new User(Keyboard.readWord());
+	p1.populateRack();
+	p2.populateRack();
+	Player[] players= new Player[]{p1, p2};
+	
+	System.out.println("You intrepid warriors are now to set out on a vicious battle to the death, or, preferably, the higher score when the bag runs out of letters. Keep in mind that this game of Scrabble is mad hardcore, yo, and that entering an incorrect word will forfeit your turn!\n Players, take your marks,\nget set,\nGO!");
+
+	//gamePlay
+       	while(BAG.size()>= 7-p1.rack.size()) {
+	    for(Player p: players){
+		System.out.println("Score of "+p1.name+ " now: " + p1.score);
+		System.out.println("Score of "+p2.name+ " now: " + p2.score);
 	    
-	    System.out.println("SUFFERING LEFT: " +  BAG.size() );
-	    for(int i=0;i<board.length;i++){
-		for(int n=0;n<board[i].length;n++){
-		    boardTemp[i][n]=board[i][n];
+		System.out.println(p.name + ", it's your turn. Type any character and press ENTER to proceed");
+		Keyboard.readString();
+		populate(displayBoard,board);
+		print2d(displayBoard);
+		System.out.println("Rack before word entered");
+		System.out.println(p.getRack() );
+		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
+		input = p.placeWord();
+		quitcheck=(String)input.get(3);
+		boundcheck=(int)input.get(4);
+		lettersUsed=quitcheck.toCharArray();
+		if(place(input, p)){
+		    populate(displayBoard,board);
+		    print2d(displayBoard);
+		    p.addLetters(p.drawBag(7-p.rack.size() ));
+		    //replenishes rack
+		    System.out.println("Rack after word entered");
+		    System.out.println(p.getRack() );
+		    System.out.println("Turn score: " + wordScore);
 		}
+		else if(boundcheck == 2) {
+		    System.out.println("Entry was out of bounds");
+		}
+		else if(quitcheck.equals("iquit")) {
+		    break;
+		}
+		else if(!isWord(quitcheck) ) {
+		    System.out.println("That is not a word");
+		}
+		else if(!p.hasLetters(lettersUsed)){
+		    System.out.println("wrong letters");
+		}
+		//resets temp board
+		for(int i=0;i<board.length;i++){
+		    for(int n=0;n<board[i].length;n++){
+			boardTemp[i][n]=board[i][n];
+		    }
+		}
+		try{
+		    Thread.sleep(10000);
+		}
+		catch(InterruptedException e){
+		}
+		System.out.println("printf \"\033c\"");
 	    }
 	}
-	System.out.println("Bag ran out of letters");
-       	System.out.println("Thanks for playing");
-       	System.out.println("You scored a total of " + User.score + " points");
+	print2d(displayBoard);
+	System.out.println("Thanks for playing");
+	System.out.println(p1.name +", you scored a total of " + p1.score + " points");
+	System.out.println(p2.name +", you scored a total of " + p2.score + " points");
     
-    } 	    
-        
-    public static void main(String args[]){
-	//	play();
     }
 }
