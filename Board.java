@@ -555,7 +555,6 @@ creates temporary board with word placed to check legality
 	}
 	
      }
-
 	
     //-----------------------------------------------------------------------------------
     
@@ -593,43 +592,46 @@ ONE METHOD TO RULE THEM ALL
 	//System.out.println(isWord("bird"));
 
 	/*
-	for (int x = 0; x < 10; x++){
-	    System.out.println(dictionary[x]);
-	}
+	  for (int x = 0; x < 10; x++){
+	  System.out.println(dictionary[x]);
+	  }
 	*/
        	while(running) {
-	User.addLetters(User.drawBag(7-User.rack.size() ));
-	populate(displayBoard,board);
-	print2d(displayBoard);
-        System.out.println("Rack before word entered");
-	System.out.println(User.getRack() );
-	System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
-       	input = User.placeWord();
-	quitcheck=(String)input.get(3);
-	boundcheck=(int)input.get(4);
-	lettersUsed=quitcheck.toCharArray();
-	System.out.println("You entered:" + quitcheck);
-	if(place(input)){
-	    // populate(displayBoard,board);
-	    // print2d(displayBoard);
-	    User.useLetters(lettersUsed);
-	    System.out.println("Rack after word entered");
+	    User.addLetters(User.drawBag(7-User.rack.size() ));
+	    populate(displayBoard,board);
+	    print2d(displayBoard);
+	    System.out.println("Rack before word entered");
 	    System.out.println(User.getRack() );
-	    System.out.println("Turn score: " + wordScore);
-	    System.out.println("Score of User now: " + User.score);
-	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
-	}
-	else if(boundcheck == 2) {
-	    System.out.println("Entry was out of bounds");
-	}
-	else if(quitcheck.equals("iquit")) {
-	    System.out.println("Thanks for playing");
-	    System.out.println("You scored a total of " + User.score + " points");
-	    running=false;
-	}
-	else {
-	    System.out.println("That is not a word");
-	}
+	    System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and iquit as your word to end the game");
+	    input = User.placeWord();
+	    quitcheck=(String)input.get(3);
+	    boundcheck=(int)input.get(4);
+	    lettersUsed=quitcheck.toCharArray();
+	    System.out.println("You entered:" + quitcheck);
+	    if(User.useLetters(lettersUsed)&&place(input)){
+		// populate(displayBoard,board);
+		// print2d(displayBoard);
+	    
+		System.out.println("Rack after word entered");
+		System.out.println(User.getRack() );
+		System.out.println("Turn score: " + wordScore);
+		System.out.println("Score of User now: " + User.score);
+		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>");
+	    }
+	    else if(boundcheck == 2) {
+		System.out.println("Entry was out of bounds");
+	    }
+	    else if(quitcheck.equals("iquit")) {
+		System.out.println("Thanks for playing");
+		System.out.println("You scored a total of " + User.score + " points");
+		running=false;
+	    }
+	    else if(!User.useLetters(lettersUsed)){
+		System.out.println("wrong letters");
+	    }
+	    else{
+		System.out.println("That is not a word");
+	    }
 	}
     
     } 	    
