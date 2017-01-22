@@ -13,8 +13,8 @@ pd3
 [x]test the checker
 [x]one person can input words onto the board and have them approved if they are legal
 [x]implement racks and functionality
-[ ]if letter already on board don't remove from rack !!! 
+[x]if letter already on board don't remove from rack !!! 
 [ ]make AI to place random words
-[ ]polishing game/menu
+[x]polishing game/menu
 [ ]Improve AI
 [ ]Improve board formatting

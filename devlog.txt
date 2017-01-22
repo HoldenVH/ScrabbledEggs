@@ -18,7 +18,9 @@ wow we so BOSS bc...
 -checking word/move legality(1/15)
 -CHECKING VS DICTIONARY (1/15)
 -fix error regarding checking score of criss-crossed words (1/15)
-
+-finished touching algo/made board print when needed (1/19)
+-racks (1/21)
+-2-player functionality (1/22)
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,14 +30,13 @@ maybe some of these will move into the Obs.Ovrcm section...
 -setting up score values(double/triple letter/word)
 -setting up AI
 -tell user which way is x and y
--print board before starting game
-
-
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo!...
-TEMP BOARDS <3
+  - wow! oo!...
+  - TEMP BOARDS <3
+  - How to clear terminal :O
+  - Thread.sleep(ms)
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,6 +44,8 @@ we changed ___ to ___ bc...
 -we changed using BufferedReader to Scanner bc it just wasn't working >:(
 -same reason for linear search vs binary search (MVP);
 -adjusted our program to use a temporary board and an easier (and working) approach.
+-made User an instantiable class in order to implement 2-player functionality
+-changing 2-player from sequential to a for loop because it made the code more compact
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,6 +53,7 @@ tales of wisdom gained...
 ||||||||||||||||||||||||||||||||||||||||||
 -MVPs are very important
 -either we are all really dumb or java is doing something weird EDIT: we are dumb.
+-sleep is for the weak
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -59,7 +63,7 @@ tales of wisdom gained...
    \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
     \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
 ==============================================================
-
+*Team ScrabbledEggs -> productive Skype calls, one driver, two navigators
 
 yyyy-mm-dd
 @2017-01-11
@@ -87,7 +91,7 @@ David, Henry :: worked on feedWord and scoreWord to implement into isWord that H
 Holden  :: fixed feedWord branch checker
 Henry  :: implemented binary dictionary checker, implemented scoring algorithm
 David :: implemented temporary board (with help from Henry) 
-Team ScrabbledEggs  :: went to bed
+Team ScrabbledEggs :: went to bed
 ==============================================================
 
 @2017-01-16
@@ -98,5 +102,25 @@ Holden :: implemented touching(), now all words after the first one must be in c
 @2017-01-18
 --------------------------------------------------------------
 Holden :: formatted root directory
-Henry ::worked on rack implementation, implemented new rack methods,
-David ::fixed touching algo, implemented new rack methods
+Henry :: worked on rack implementation, implemented new rack methods,
+David :: fixed touching algo, implemented new rack methods
+
+@2017-01-19
+--------------------------------------------------------------
+David, Henry :: worked on touching algo/implemented basic rack mechanism
+==============================================================
+
+@2017-01-21
+--------------------------------------------------------------
+Team ScrabbledEggs :: implemented basic UseLetters and hasLetters
+==============================================================
+
+@2017-01-22
+--------------------------------------------------------------
+Team ScrabbledEggs: implemented single/double Player
+Holden :: implemented 2-player functionality by making User instantiable
+Henry :: fixed feedWord
+David :: fixed scoring algo, rerollrack
+==============================================================
+
+
