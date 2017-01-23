@@ -39,20 +39,6 @@ populates ArrayList that holds game bag
 	    BAG.add(a);
 	}
     }
-    /*==================================================
-checks if anything has been placed on the board
-      ==================================================*/
-    public static boolean emptyCheck() {
-    	for(int i=0;i< board.length;i++){
-	    for(int n=0;n< board.length;n++){
-		if(board[i][n] !=(char)' '){
-		    return false;
-		}
-	    }
-	}
-	return true;
-    }
-
         /*==================================================
 generalized print for 2d arrays
       ==================================================*/
@@ -529,6 +515,7 @@ creates temporary board with word placed to check legality
 	    //gets start pos, adjusts for use with board
 	    int x=(int)input.get(0)-1;
 	    int y=(int)input.get(1)-1;
+	    String wordS = (String)input.get(3);
 	    if(x>14||y>14||x<0||y<0){//if user input out of bounds
 		System.out.println("ERROR: Please input valid COORDINATES next time");
 		return false;
@@ -539,7 +526,30 @@ creates temporary board with word placed to check legality
 		System.out.println("ERROR: Please input a valid DIRECTION next time");
 		return false;
 	    }
-	    char[] word=((String)input.get(3)).toCharArray();//splits word input into chars
+	    if(first) { //if first word is not centered, center it
+		boolean centered = false;
+		if(dir) {
+		    if(y==7 && x <= 7 && x+wordS.length() >= 7) {
+			centered=true;
+		    }
+		    else {
+			x = 7;
+			y = 7;
+			System.out.println("You didn't center it so we centered it for you");
+		    }
+		}
+		else {
+		    if(x==7 && y <= 7 && y+wordS.length() >= 7) {
+			centered=true;
+		    }
+		    else {
+			x = 7;
+			y = 7;
+			System.out.println("You didn't center it so we centered it for you");
+		    }
+		}     
+	    }
+	    char[] word=wordS.toCharArray();//splits word input into chars
 	    //enter word horizontally
 
 	    ArrayList<Character> lettersNeeded=new ArrayList<Character>();
@@ -650,7 +660,9 @@ ONE METHOD TO RULE THEM ALL
 		print2d(displayBoard);
 		System.out.println("Rack before word entered");
 		System.out.println(p.getRack() );
-		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and: rerollrack - to get a new rack or iquit - to end the game");
+		System.out.println("INPUT FORMAT: <x1> <y1> <dir(d/r)> <word>, enter any x,y,dir,and: rerollrack - to get a new rack or iquit - to end the game.");
+		if(first) System.out.println("The first word of the game must pass through 8,8");
+		    
 		input = p.placeWord();
 		quitcheck=(String)input.get(3);
 		boundcheck=(int)input.get(4);
@@ -693,7 +705,7 @@ ONE METHOD TO RULE THEM ALL
 		    }
 		}
 		try{
-		    Thread.sleep(10000);
+		    Thread.sleep(5000);
 		}
 		catch(InterruptedException e){
 		}
