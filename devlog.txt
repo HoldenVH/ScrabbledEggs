@@ -30,6 +30,7 @@ maybe some of these will move into the Obs.Ovrcm section...
 -setting up score values(double/triple letter/word)
 -setting up AI
 -tell user which way is x and y
+-you can overwrite the first letter of a word -_-
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
