@@ -636,19 +636,12 @@ ONE METHOD TO RULE THEM ALL
 	    }
 	}
 	//setup
-	System.out.println("Welcome to Dabbling with Scrabbling! Please enter 1 for one player or 2 for two players");
-	int playerNum = Keyboard.readInt();
 	populateBag();
 	System.out.println("Player 1, state your name:");
 	Player p1=new User(Keyboard.readWord());
 	Player p2;
-	if (playerNum == 2){
 	    System.out.println("Player 2, state your name:");
 	    p2=new User(Keyboard.readWord());
-	}
-	else{
-	    p2 = new AI();
-	}
 	p1.populateRack();
 	p2.populateRack();
 	Player[] players= new Player[]{p1, p2};
